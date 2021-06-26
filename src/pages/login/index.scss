@@ -1,3 +1,4 @@
+$myFont: "Poppins" !important;
 .page_login{
   display: flex;
 }
@@ -25,11 +26,11 @@ p.title_1{
   color:white;
   font-weight: 700;
   font-size: 25px;
-  font-family: "Poppins" !important;
+  font-family: $myFont;
 }
 p.title_2{
   color:white;
-  font-family: "Poppins" !important;
+  font-family: $myFont;
   line-height: 1.5;
   width: 400px;
 }
@@ -37,7 +38,7 @@ p.title_2{
   background-color: white;
   color: #016fd3;
   font-weight: 700;
-  font-family: "Poppins" !important;
+  font-family: $myFont;
 }
 .login_left_footer{  
   color: white;
@@ -71,7 +72,7 @@ p.title_2{
     color: #016fd3;
     font-size: 16px;
     font-weight: 600;
-    font-family: "Poppins" !important;
+    font-family: $myFont;
   }
 }
 span.icon-star{
@@ -97,7 +98,7 @@ span.icon-star{
   border-radius: 0.25rem;
 }
 .cid_captcha{  
-  font-family: "Poppins" !important;
+  font-family: $myFont;
   font-weight: 400;
   input.captcha_input{
     width:220px;
@@ -105,7 +106,7 @@ span.icon-star{
   .captcha{
     display: flex;
     span{
-      font-family: "Poppins" !important;
+      font-family: $myFont;
       font-weight: 900;
       font-size: 12px;
       background: -webkit-linear-gradient(white, blue);
@@ -128,7 +129,7 @@ span.icon-star{
     margin-left: 10px;
   }
   font-size: 20px;
-  font-family: "Poppins" !important;
+  font-family: $myFont;
   font-weight: 600;
   margin-top: 30px;
   display: flex;
@@ -138,7 +139,7 @@ span.icon-star{
   color:blue;
   margin-top:30px;
   font-size: 20px;
-  font-family: "Poppins" !important;
+  font-family: $myFont;
   font-weight: 400;
   a{    
     cursor:pointer;
@@ -156,21 +157,21 @@ span.icon-star{
     padding:3px 20px;
     font-size: 14px;
     font-weight: 600;
-    font-family:"Poppins" !important;
+    font-family:$myFont;
   }
 }
 .cid_password{
-  font-family: "Poppins" !important;
+  font-family: $myFont;
   font-weight: 400;
   margin-top: 10px;
 }
 .cid_corporate{
-  font-family: "Poppins" !important;
+  font-family: $myFont;
   font-weight: 400;
   margin-top: 10px;
 } 
 .cid_login{
-  font-family: "Poppins" !important;
+  font-family: $myFont;
   font-weight: 400;
   margin-top: 10px;
 }
