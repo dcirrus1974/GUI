@@ -1,4 +1,5 @@
 import {Navbar, Nav, NavItem, Button} from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import {
   ProSidebar,
   Menu,
@@ -45,15 +46,15 @@ const MenuBar: React.FC = () => {
         <SidebarContent>
           <Menu iconShape="square">
             <MenuItem active={true} icon={<FaRegFolder />}>
-              Personal Files
+              Personal Files<Link to="/personal" />
             </MenuItem>
-            <MenuItem icon={<FaUserFriends />}>Data Room</MenuItem>
-            <MenuItem icon={<FaRegClock />}>Recent Files</MenuItem>
-            <MenuItem icon={<FaShareAlt />}>Shared Files</MenuItem>
-            <MenuItem icon={<FaStar />}>Favourite</MenuItem>
-            <MenuItem icon={<FaTrash />}>Trash</MenuItem>
-            <MenuItem icon={<FaUser />}>Admin</MenuItem>
-            <MenuItem icon={<FaCog />}>Settings</MenuItem>
+            <MenuItem icon={<FaUserFriends />}>Data Room<Link to="/room" /></MenuItem>
+            <MenuItem icon={<FaRegClock />}>Recent Files<Link to="/recent" /></MenuItem>
+            <MenuItem icon={<FaShareAlt />}>Shared Files<Link to="/shared" /></MenuItem>
+            <MenuItem icon={<FaStar />}>Favourite<Link to="/favourite" /></MenuItem>
+            <MenuItem icon={<FaTrash />}>Trash<Link to="/trash" /></MenuItem>
+            <MenuItem icon={<FaUser />}>Admin<Link to="/admin" /></MenuItem>
+            <MenuItem icon={<FaCog />}>Settings<Link to="/settings" /></MenuItem>
           </Menu>
         </SidebarContent>        
       </ProSidebar>

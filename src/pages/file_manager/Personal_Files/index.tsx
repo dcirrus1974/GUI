@@ -6,8 +6,13 @@ const Personal_Files: React.FC = () => {
     return (
       <div className="Personal_Files">
         <Header/>
-        <Menubar/>
-        
+        <div className="personal_page">
+          <Menubar/>
+          <div className="personal_page_right">
+            <div className="personal_title">PERSONAL FILES</div>
+                        
+          </div>
+        </div>
       </div>      
     );
 }
