@@ -6,7 +6,6 @@ import Index_left from './Index_left';
 import Index_right from './Index_right';
 import './index.scss';
 
-
 const Login: React.FC = () => {    
     return (
       <div className="page_login">

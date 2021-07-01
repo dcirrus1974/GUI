@@ -2,7 +2,6 @@ import React, {useState, useEffect, useRef} from 'react'
 import { Button , ButtonGroup} from 'react-bootstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons'
-//import {Button} from '@material-ui/core';
 
 import './index.scss';
 import img_icon from '../../assets/images/dcirruslogo_big.png';
