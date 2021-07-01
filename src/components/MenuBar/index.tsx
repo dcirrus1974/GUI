@@ -8,7 +8,7 @@ import {
   SidebarContent,
 } from "react-pro-sidebar";
 //import icons from react icons
-import { FaList, FaRegHeart } from "react-icons/fa";
+import { FaList, FaRegHeart, FaRegFolder,FaUserFriends, FaRegClock, FaShareAlt, FaStar,FaCog, FaTrash, FaUser } from "react-icons/fa";
 import { FiHome, FiLogOut, FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
 import { RiPencilLine } from "react-icons/ri";
 import { BiCog } from "react-icons/bi";
@@ -44,20 +44,18 @@ const MenuBar: React.FC = () => {
         </SidebarHeader>
         <SidebarContent>
           <Menu iconShape="square">
-            <MenuItem active={true} icon={<FiHome />}>
+            <MenuItem active={true} icon={<FaRegFolder />}>
               Personal Files
             </MenuItem>
-            <MenuItem icon={<FaList />}>Data Room</MenuItem>
-            <MenuItem icon={<FaRegHeart />}>Recent Files</MenuItem>
-            <MenuItem icon={<RiPencilLine />}>Author</MenuItem>
-            <MenuItem icon={<BiCog />}>Settings</MenuItem>
+            <MenuItem icon={<FaUserFriends />}>Data Room</MenuItem>
+            <MenuItem icon={<FaRegClock />}>Recent Files</MenuItem>
+            <MenuItem icon={<FaShareAlt />}>Shared Files</MenuItem>
+            <MenuItem icon={<FaStar />}>Favourite</MenuItem>
+            <MenuItem icon={<FaTrash />}>Trash</MenuItem>
+            <MenuItem icon={<FaUser />}>Admin</MenuItem>
+            <MenuItem icon={<FaCog />}>Settings</MenuItem>
           </Menu>
-        </SidebarContent>
-        <SidebarFooter>
-          <Menu iconShape="square">
-            <MenuItem icon={<FiLogOut />}>Logout</MenuItem>
-          </Menu>
-        </SidebarFooter>
+        </SidebarContent>        
       </ProSidebar>
     </div>
   </>
