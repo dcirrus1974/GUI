@@ -1,3 +1,4 @@
+$myfontsize:24px;
 .personal_page{
     display: flex;
     justify-content: start;
@@ -5,6 +6,30 @@
 .personal_title{
     margin-top: 20px;
     margin-left: 20px;
-    font-size: 24px;
+    font-size: $myfontsize;
     font-weight: 600;
+}
+.personal_page_right_top{
+    display: flex;
+    justify-content:flex-start;
+}
+.personal_btn_group{
+    display: flex;
+    margin-left: 300px;
+    margin-top:20px;
+    button{
+        margin-left: 10px;
+        background-color: white;
+        color: blue;
+        border: solid 1px blue;
+        :hover{
+            color:white;
+        }
+    }
+}
+.personal_btn_group .icon_side svg{
+    margin-top: 2px;
+    margin-left: 20px;
+    width: 30px;
+    height: 30px;
 }
