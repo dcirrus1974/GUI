@@ -1,0 +1,15 @@
+.usercell{
+    display: flex;
+    justify-content:center;
+    gap: 20px;
+    align-items: center;
+}
+.editcell{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+.MuiDialogContent-root{
+    display: flex;
+    flex-direction: column;
+}

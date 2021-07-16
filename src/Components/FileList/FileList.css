@@ -1,0 +1,54 @@
+.folder_content {
+    overflow: auto;    
+}
+
+.file_content {
+    overflow: auto;    
+}
+hr{
+    display: block;
+    border: 0;
+    border-top: 1px solid rgb(233, 226, 226);
+    margin: 1em 0; padding: 0; 
+}
+
+.FileList .File{
+    border:1px solid rgb(233, 226, 226);
+    border-radius: 5px;
+    margin: 20px 20px;
+}
+
+.FileList .File .filename > span {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+@media (min-width : 600px) {
+    .FileList .File {
+        float: left;
+        width: 33.3%;
+    }
+}
+@media (min-width : 1024px) {
+    .FileList .File {
+        float: left;
+        width: 20%;
+    }
+}
+
+.folder_title{
+    margin-left: 20px;
+    font-family: "Poppins" !important;
+    font-size: 20px;
+    font-weight: 600;
+    color: #898989;
+}
+
+.file_title{
+    margin-left: 20px;
+    font-family: "Poppins" !important;
+    font-size: 20px;
+    font-weight: 600;
+    color: #898989;
+}

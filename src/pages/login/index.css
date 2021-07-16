@@ -1,0 +1,206 @@
+.page_login{
+  display: flex;
+}
+.login_part_left{
+  padding: 50px 12% 50px 12%;
+  background-color: #016fd3;
+  height: 100vh;
+}
+.login_part_right{
+  padding: 40px 22% 35px 22%;
+}
+.icon_header{  
+  width: auto;  
+}
+.mid_line{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 50px;
+  background-color: white;
+  border:2px solid #f5f5fb;
+}
+p.title_1{
+  color:white;
+  font-weight: 700;
+  font-size: 25px;
+  font-family: "Poppins" !important;
+}
+p.title_2{
+  color:white;
+  font-family: "Poppins" !important;
+  line-height: 1.5;
+}
+
+
+.login_left_footer{  
+  color: white;
+  margin-top: 100px;    
+}
+.login_left_footer a:link a:hover{
+  color:white;
+}
+.login_left_footer a{
+  color:white;    
+  font-size:14px ;
+  font-weight: 600;
+}
+
+.login_copyright{
+  margin-top:20px;
+  color:white;
+  font-size: 12px;
+  font-weight: 400;
+}
+.title_login{
+  color: black;
+  font-size: 22px;
+  font-weight: 700;
+}
+.btn_group_1{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+#individual {
+  width: 200px;
+  color: #016fd3;
+  background-color: white;
+  border-radius: 3px;
+  border-right: none;
+}
+#bussiness {
+  width: 200px;
+  color: white;
+  background-color: #016fd3;
+  border-radius: 3px;
+  border-left: none;
+}
+.forgot_btm button{
+  background-color: white;
+  border: 1px solid #016fd3;
+}
+.forgot_btm button:hover{
+  color: white;
+  background-color: #016fd3;
+}
+
+span.icon-star{
+  color:red;
+}
+
+.cid_captcha{  
+  margin-top: 20px;
+  font-family: "Poppins" !important;
+  font-weight: 800;
+  font-size: 15px;
+}
+.cid_captcha .captcha span{
+  font-family: "Poppins" !important;
+  font-weight: 900;
+  font-size: 24px;
+  background: -webkit-linear-gradient(white, blue);
+  background-clip: inherit;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding:3px 20px;
+  margin: auto auto auto 30px;
+  border: none;
+  border-radius: 0.25rem;
+}
+.login_bottom{
+  font-size: 20px;
+  font-family: "Poppins" !important;
+  font-weight: 600;
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.login_bottom label{
+  margin-left: 10px;
+}
+.login_btm_url{
+  color:blue;
+  margin-top:30px;
+  font-size: 20px;
+  font-family: "Poppins" !important;
+  font-weight: 400;
+}
+.login_btm_url a{    
+  cursor:pointer;
+  color: blue;
+}
+.forgot_btm{
+  margin-top: 40px;
+  display: flex;
+  justify-content:flex-end;
+}
+
+
+.cid_password{
+  margin-top: 20px;
+  font-family: "Poppins" !important;
+  font-weight: 800;
+  font-size: 15px;
+}
+.cid_corporate{
+  font-family: "Poppins" !important;
+  font-weight: 800;
+  margin-top: 20px;
+  font-size: 15px;
+} 
+.cid_login{
+  font-family: "Poppins" !important;
+  font-weight: 800;
+  margin-top: 10px;
+  font-size: 15px;
+}
+.title_forgot{
+  margin-top: 100px;
+  color: black;
+  font-size: 22px;
+  font-weight: 700;
+}
+.input-group{
+  display: flex;
+  border: 1px solid #9f9f9f;
+}
+.input-group input{
+  border: 0ch;
+  width:350px;
+}
+.btn_page button{
+  background-color: white;
+  color:#016fd3;
+}
+.input-group-append svg{
+  margin-top: 5px;
+}
+.login_stay_check input{
+  height: 15px;
+}
+.login_bottom button{
+  margin-left: 100px;
+  width: 100px;
+  height: 30px;
+  color: white;
+  background-color: #016fd3;
+}
+.login_bottom button:hover{
+  color: #016fd3;
+  background-color: white;
+  border: 1px solid #016fd3;
+}
+.img_captcha {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 1px #c4c4c4;
+  border-radius: 2px;
+  height: 38px;
+  width: 150px;
+  margin-left: 12px;
+  background-size: 202px;
+  background-repeat: no-repeat;
+  background-position-x: 25px;
+  background-position-y: 7px;
+}

@@ -1,0 +1,4 @@
+.MuiTableCell-alignRight.avatar_{
+    display: flex;
+    justify-content: flex-end;
+}

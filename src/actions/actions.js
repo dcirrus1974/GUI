@@ -1,0 +1,132 @@
+import Axios from 'axios';
+
+export const PERSONAL_DATA = 'PERSONAL REDUCER PERSONAL DATA';
+export const FOLDERCLICK_DATA = 'FOLDER REDUCER CLICK DATA';
+export const SET_LOADING = 'SET REDUCER LOADING';
+export const SET_VISIBLE_DIALOG_CREATE_FOLDER = 'SET VISIBLE DIALOG CREATE FOLDER';
+export const SET_VISIBLE_DIALOG_UPLOAD_FILE = 'SET VISIBLE DIALOG UPLOAD FILE';
+export const SET_VISIBLE_DILOG_EDIT_SETTINGS = 'SET VISIBLE DILOG EDIT SETTINGS';
+export const SET_VISIBLE_DIALOG_CREATE_NEW_USER = 'SET VISIBLE DIALOG CREATE NEW USER';
+export const SET_VISIBLE_DIALOG_RENAME = 'SET VISIBLE DIALOG RENAME';
+export const SET_VISIBLE_DIALOG_DEPOSIT_REQUEST = 'SET VISIBLE DIALOG DEPOSIT REQUEST';
+export const SET_VISIBLE_DIALOG_SEARCH_OPTION = 'SET VISIBLE DIALOG SEARCH OPTION';
+export const SET_VISIBLE_DIALOG_TAG_FILES = 'SET VISIBLE DIALOG TAG FILES';
+export const SET_VISIBLE_DIALOG_SHARE_FILES = 'SET VISIBLE DIALOG SHARE FILES';
+
+export const getPersonalData = () => async dispatch => {
+  dispatch(setLoading(true));
+  const personalData = await Axios.request({
+    url: 'https://dcirrus.co.in/api.acms/v1/app/unindexfolderlistg/0/zerolevel/0/S/fetchAllAdmFolderListResponse',
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('token'),
+    },
+    withCredentials: true,
+  });
+
+  dispatch(setLoading(false));
+  if(!personalData.data.error)
+		dispatch({
+			type: PERSONAL_DATA,
+			payload: personalData.data,
+		});
+  else
+		dispatch({
+			type: PERSONAL_DATA,
+			payload: 'error',
+		});
+}
+
+export const folderClickResults = (folderId) => async dispatch => {
+  const folderDoubleClick = await Axios.request({
+    url: 'https://dcirrus.co.in/api.acms/v1/app/unindexdoclist/0/0/' + folderId +'/DESC%60lastmodified/fetchAllAdmFolderChildListResponse',
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('token'),
+    },
+    withCredentials: true,
+  });
+
+  if(!folderDoubleClick.data.error)
+    dispatch({
+      type: FOLDERCLICK_DATA,
+      payload: folderDoubleClick.data,
+    });
+  else
+    dispatch({
+      type: FOLDERCLICK_DATA,
+      payload: 'error',
+    });
+}
+
+export const setLoading = (value) => {
+  return {
+    type: SET_LOADING,
+    payload: value,
+  };
+};
+
+export const setVisibleDialogCreateFolder = (visible) => {
+  return {
+    type: SET_VISIBLE_DIALOG_CREATE_FOLDER,
+    payload: !!visible,
+  };
+};
+
+export const setVisibleDialogUploadFile = (visible) => {
+  return {
+    type: SET_VISIBLE_DIALOG_UPLOAD_FILE,
+    payload: !!visible,
+  };
+};
+
+export const setVisibleDialogEditSettings = (visible) => {
+  return {
+    type: SET_VISIBLE_DILOG_EDIT_SETTINGS,
+    payload: !!visible,
+  }
+}
+
+export const setVisibleDialogCreateNewUser = (visible) => {
+  return {
+    type: SET_VISIBLE_DIALOG_CREATE_NEW_USER,
+    payload: !!visible,
+  }
+}
+
+export const setVisibleDialogRename = (visible) => {
+  return {
+    type: SET_VISIBLE_DIALOG_RENAME,
+    payload: !!visible,
+  }
+}
+
+export const setVisibleDialogDepositRequest = (visible) => {
+  return {
+    type: SET_VISIBLE_DIALOG_DEPOSIT_REQUEST,
+    payload: !!visible,
+  }
+}
+
+export const setVisibleDialogSearchOption = (visible) => {
+  return {
+    type: SET_VISIBLE_DIALOG_SEARCH_OPTION,
+    payload: !!visible,
+  }
+}
+
+export const setVisibleDialogTagFiles = (visible) => {
+  return {
+    type: SET_VISIBLE_DIALOG_TAG_FILES,
+    payload: !!visible,
+  }
+}
+
+export const setVisibleDialogShareFiles = (visible) => {
+  return {
+    type: SET_VISIBLE_DIALOG_SHARE_FILES,
+    payload: !!visible,
+  }
+}
