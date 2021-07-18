@@ -14,7 +14,7 @@ export default function Devices(){
       <Navbar />
       <div style={{display: 'flex'}}>
         <Sidebar />
-        <div style={{width: '100%'}}>
+        <div style={{width: '100%', marginTop: '74px'}}>
           <Header title="Devices" setId={setId} Id={Id}/>
           {Id?<EnhancedTableAll/>:<EnhancedTableAuto/>}
         </div>

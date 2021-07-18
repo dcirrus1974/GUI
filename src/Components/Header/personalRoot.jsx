@@ -3,6 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import CreateFolderAction from '../ContextMenu/ContextMenuActions/CreateFolderAction.jsx';
 import UploadFileAction from '../ContextMenu/ContextMenuActions/UploadFileAction.jsx';
 import ViewAgendaRoundedIcon from '@material-ui/icons/ViewAgendaRounded';
+import { BsFillGridFill } from "react-icons/bs";
+import { useDispatch, useSelector } from 'react-redux';
+import {setIsTable} from '../../actions/actions';
+import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,11 +26,20 @@ const useStyles = makeStyles((theme) => ({
   list: {
     color: 'grey',
     cursor: 'pointer',
-  }
+  },
+  bsfill: {
+    color: 'grey',
+    cursor: 'pointer',
+    width: '20px',
+    height: '20px',
+  },
 }));
 
 export default function Header(props) {
   const classes = useStyles();
+  const dispatch =useDispatch();
+  const isTable = useSelector(state => state.personalData.isTable);
+
 
   return (
     <div className={classes.root}>
@@ -35,8 +48,13 @@ export default function Header(props) {
       </div>
       <div className={classes.grow} />
       <CreateFolderAction />
-      <UploadFileAction />
-      <ViewAgendaRoundedIcon className={classes.list} />
+      <UploadFileAction />      
+      <IconButton onClick={() => dispatch(setIsTable(!isTable))}>              
+        {isTable?
+        <ViewAgendaRoundedIcon className={classes.list} />:
+        <BsFillGridFill className={classes.bsfill} />
+        }
+      </IconButton>
     </div>
   );
 }

@@ -18,6 +18,8 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import Collapse from '@material-ui/core/Collapse';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import { setActionOpenClose } from '../../actions/actions';
+import { useDispatch, useSelector } from 'react-redux';
 
 function ListItemLink(props) {
   return <ListItem button component={NavLink} {...props} />;
@@ -100,12 +102,9 @@ const renderHref=(index)=>{
 
 export default function Sidebar() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const open = useSelector(state => state.personalData.actionOpenClose);
   const isOpen = true;
-  const [open, setOpen] = React.useState(true);
-
-  const handleClick = () => {
-    setOpen(!open);
-  };
 
   return (
     <div className={classes.root}>
@@ -121,29 +120,29 @@ export default function Sidebar() {
         <List>
           {['Personal Files', 'Data Room', 'Recent Files', 'Shared Files', 'Favourite', 'Trash', 'Admin', 'Settings'].map((text, index) => (
               text==='Admin'?
-              <>
-              <ListItem button onClick={handleClick}>
-                <ListItemIcon>
-                    {renderSwitch(index)}
-                </ListItemIcon> 
-                <ListItemText primary={text} />
-                {open ? <ExpandMore />:<ChevronRightIcon />}
-              </ListItem>
-              <Collapse in={open} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
-                  <ListItemLink to="/admin/users" className={classes.nested} activeClassName={classes.active}>                    
-                    <ListItemText primary="Users" />
-                  </ListItemLink>
-                  <ListItemLink to="/admin/devices" className={classes.nested} activeClassName={classes.active}>
-                    <ListItemText primary="Devices" />
-                  </ListItemLink>
-                  <ListItemLink to="/admin/access" className={classes.nested} activeClassName={classes.active}>
-                    <ListItemText primary="Access Permissions" />
-                  </ListItemLink>
-                </List>
-              </Collapse>
-              </>
-              :<ListItemLink key={index} to={renderHref(index)} activeClassName={text==="Trash"?classes.trash:classes.active}>
+              <div key={index}>
+                <ListItem button onClick={() => dispatch(setActionOpenClose(!open))}>
+                  <ListItemIcon>
+                      {renderSwitch(index)}
+                  </ListItemIcon> 
+                  <ListItemText primary={text} />
+                  {open ? <ExpandMore />:<ChevronRightIcon />}
+                </ListItem>
+                <Collapse in={open} timeout="auto" unmountOnExit>
+                  <List component="div" disablePadding>
+                    <ListItemLink to="/admin/users" className={classes.nested} activeClassName={classes.active}>                    
+                      <ListItemText primary="Users" />
+                    </ListItemLink>
+                    <ListItemLink to="/admin/devices" className={classes.nested} activeClassName={classes.active}>
+                      <ListItemText primary="Devices" />
+                    </ListItemLink>
+                    <ListItemLink to="/admin/access" className={classes.nested} activeClassName={classes.active}>
+                      <ListItemText primary="Access Permissions" />
+                    </ListItemLink>
+                  </List>
+                </Collapse>
+              </div>
+              :<ListItemLink key={index} to={renderHref(index)} activeClassName={text==="Trash"?classes.trash:classes.active} onClick={() => dispatch(setActionOpenClose(false))}>
                 <ListItemIcon>
                     {renderSwitch(index)}
                 </ListItemIcon> 

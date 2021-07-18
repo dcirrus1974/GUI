@@ -2,9 +2,8 @@ import React from 'react';
 import Navbar from '../../../Components/Navbar';
 import Sidebar from '../../../Components/Sidebar';
 import PersonalSubHeader from '../../../Components/Header/personalSub';
-// import FileList from '../../../Components/FileList/FileList.jsx';
+import FileList from '../../../Components/FileList/FileList.jsx';
 import Dialogs from '../../../Components/Dialogs/Dialogs.jsx';
-import EnhancedTable from '../../../Components/File/FileTable/FileTable.jsx';
 
 export default function DataRoom(){
 
@@ -13,9 +12,9 @@ export default function DataRoom(){
       <Navbar />
       <div style={{display: 'flex'}}>
         <Sidebar />
-        <div style={{width: '100%'}}>
+        <div style={{width: '100%', marginTop: '74px'}}>
           <PersonalSubHeader title="Data Room" />
-          <EnhancedTable />
+          <FileList/>
         </div>
       </div>
       <Dialogs />

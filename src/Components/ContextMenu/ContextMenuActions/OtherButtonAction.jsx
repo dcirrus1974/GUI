@@ -5,6 +5,11 @@ import { setVisibleDialogRename,
         setVisibleDialogDepositRequest,
         setVisibleDialogTagFiles,
         setVisibleDialogShareFiles,
+        setVisibleDialogDeleteFilesOrFolders,
+        setVisibleDialogExportLogs,
+        setVisibleDialogCopy,
+        setVisibleDialogMove,
+        setVisibleDialogHistory,
       } from '../../../actions/actions';
 
 export default function OtherButtonAction() {
@@ -39,6 +44,41 @@ export default function OtherButtonAction() {
         onClick={() => dispatch(setVisibleDialogShareFiles(true)) }
         style={{textTransform: 'none', backgroundColor: '#2196f3', color: 'white', marginRight: '20px'}}>
         Share Files
+      </Button>
+      <Button 
+        variant="contained" 
+        size="large" 
+        onClick={() => dispatch(setVisibleDialogDeleteFilesOrFolders(true)) }
+        style={{textTransform: 'none', backgroundColor: '#2196f3', color: 'white', marginRight: '20px'}}>
+        Delete Files or Folders
+      </Button>
+      <Button 
+        variant="contained" 
+        size="large" 
+        onClick={() => dispatch(setVisibleDialogExportLogs(true)) }
+        style={{textTransform: 'none', backgroundColor: '#2196f3', color: 'white', marginRight: '20px'}}>
+        Export Logs
+      </Button>
+      <Button 
+        variant="contained" 
+        size="large" 
+        onClick={() => dispatch(setVisibleDialogCopy(true)) }
+        style={{textTransform: 'none', backgroundColor: '#2196f3', color: 'white', marginRight: '20px'}}>
+        Copy
+      </Button>
+      <Button 
+        variant="contained" 
+        size="large" 
+        onClick={() => dispatch(setVisibleDialogMove(true)) }
+        style={{textTransform: 'none', backgroundColor: '#2196f3', color: 'white', margin: '35px 0 0 20px'}}>
+        Move
+      </Button>
+      <Button 
+        variant="contained" 
+        size="large" 
+        onClick={() => dispatch(setVisibleDialogHistory(true)) }
+        style={{textTransform: 'none', backgroundColor: '#2196f3', color: 'white', margin: '35px 20px 0 20px'}}>
+        Version History
       </Button>
     </>
   );

@@ -68,7 +68,7 @@ export default function NotificationMenu() {
     >
       <List>
         <ListItem className={classes.title_row}>
-          <div className={classes.title}><Typography color="primary" variant="h6">Notifications</Typography>
+          <div className={classes.title}><Typography style={{color:'blue'}} variant="h6">Notifications</Typography>
           <Typography variant="caption">Showing 99 notifications</Typography></div>
           <IconButton aria-label="close"  onClick={toggleDrawer(anchor, false)}>
             <CloseIcon />
@@ -76,7 +76,7 @@ export default function NotificationMenu() {
         </ListItem>
         <Divider />
         {['Akhil@dcirrus.com', 'Akhil@dcirrus.com', 'Akhil@dcirrus.com', 'Akhil@dcirrus.com','Akhil@dcirrus.com','Akhil@dcirrus.com','Akhil@dcirrus.com','Akhil@dcirrus.com'].map((text, index) => (
-        <>        
+        <div key={index}>        
           <ListItem button key={text} className={classes.title_row}>            
             <div className={classes.title}>
               <Typography variant="h6">{text}</Typography>
@@ -88,8 +88,7 @@ export default function NotificationMenu() {
           </ListItem>
           <Divider />
           <Typography variant="caption" className={classes.pad_left}>Request for File Deposite</Typography>
-
-        </>
+        </div>
         ))}         
       </List>
       <BottomNavigation className={classes.bottom}>

@@ -352,7 +352,7 @@ function LongMenu() {
           }}
         >
           {options.map((option,index) => (
-            <MenuItem key={option} onClick={handleClose}>
+            <MenuItem key={index} onClick={handleClose}>
               {option}
             </MenuItem>
           ))}
@@ -369,23 +369,23 @@ const editcell=
 </div>;
 const rows = [
   createData('Akhil', 'Akhil@dcirrus.com', '0 Bytes', '0 Bytes', editcell),
-  createData('Akhil', 'Akhil@dcirrus.com', '0 Bytes', '0 Bytes', editcell),
-  createData('Akhil', 'Akhil@dcirrus.com', '0 Bytes', '0 Bytes', editcell),
-  createData('Akhil', 'Akhil@dcirrus.com', '0 Bytes', '0 Bytes', editcell),
-  createData('Akhil', 'Akhil@dcirrus.com', '0 Bytes', '0 Bytes', editcell),
-  createData('Akhil', 'Akhil@dcirrus.com', '0 Bytes', '0 Bytes', editcell),
-  createData('Akhil', 'Akhil@dcirrus.com', '0 Bytes', '0 Bytes', editcell),
-  createData('Akhil', 'Akhil@dcirrus.com', '0 Bytes', '0 Bytes', editcell),
-  createData('Akhil', 'Akhil@dcirrus.com', '0 Bytes', '0 Bytes', editcell),
-  createData('Akhil', 'Akhil@dcirrus.com', '0 Bytes', '0 Bytes', editcell),
-  createData('Akhil', 'Akhil@dcirrus.com', '0 Bytes', '0 Bytes', editcell),
-  createData('Akhil', 'Akhil@dcirrus.com', '0 Bytes', '0 Bytes', editcell),
-  createData('Akhil', 'Akhil@dcirrus.com', '0 Bytes', '0 Bytes', editcell),
-  createData('Akhil', 'Akhil@dcirrus.com', '0 Bytes', '0 Bytes', editcell),
-  createData('Akhil', 'Akhil@dcirrus.com', '0 Bytes', '0 Bytes', editcell),
-  createData('Akhil', 'Akhil@dcirrus.com', '0 Bytes', '0 Bytes', editcell),
-  createData('Akhil', 'Akhil@dcirrus.com', '0 Bytes', '0 Bytes', editcell),
-  createData('Akhil', 'Akhil@dcirrus.com', '0 Bytes', '0 Bytes', editcell),
+  createData('Akhil', 'Akhil@dcirrus.com', '1 Bytes', '0 Bytes', editcell),
+  createData('Akhil', 'Akhil@dcirrus.com', '2 Bytes', '0 Bytes', editcell),
+  createData('Akhil', 'Akhil@dcirrus.com', '3 Bytes', '0 Bytes', editcell),
+  createData('Akhil', 'Akhil@dcirrus.com', '4 Bytes', '0 Bytes', editcell),
+  createData('Akhil', 'Akhil@dcirrus.com', '5 Bytes', '0 Bytes', editcell),
+  createData('Akhil', 'Akhil@dcirrus.com', '6 Bytes', '0 Bytes', editcell),
+  createData('Akhil', 'Akhil@dcirrus.com', '7 Bytes', '0 Bytes', editcell),
+  createData('Akhil', 'Akhil@dcirrus.com', '8 Bytes', '0 Bytes', editcell),
+  createData('Akhil', 'Akhil@dcirrus.com', '9 Bytes', '0 Bytes', editcell),
+  createData('Akhil', 'Akhil@dcirrus.com', '10 Bytes', '0 Bytes', editcell),
+  createData('Akhil', 'Akhil@dcirrus.com', '11 Bytes', '0 Bytes', editcell),
+  createData('Akhil', 'Akhil@dcirrus.com', '12 Bytes', '0 Bytes', editcell),
+  createData('Akhil', 'Akhil@dcirrus.com', '13 Bytes', '0 Bytes', editcell),
+  createData('Akhil', 'Akhil@dcirrus.com', '14 Bytes', '0 Bytes', editcell),
+  createData('Akhil', 'Akhil@dcirrus.com', '15 Bytes', '0 Bytes', editcell),
+  createData('Akhil', 'Akhil@dcirrus.com', '16 Bytes', '0 Bytes', editcell),
+  createData('Akhil', 'Akhil@dcirrus.com', '17 Bytes', '0 Bytes', editcell),
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -431,9 +431,9 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow>
-        {headCells.map((headCell) => (
+        {headCells.map((headCell, index) => (
           <TableCell
-            key={headCell.id}
+            key={index}
             align='center'
             padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
@@ -507,7 +507,7 @@ export default function EnhancedTable() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.name);
+      const newSelecteds = rows.map((n,index) => index);
       setSelected(newSelecteds);
       return;
     }
@@ -576,11 +576,11 @@ export default function EnhancedTable() {
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.Username)}
+                      onClick={(event) => handleClick(event, (index+ page * rowsPerPage))}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.Username}
+                      key={index}
                       selected={isItemSelected}
                     >
                       <TableCell align="center" component="th" id={labelId} scope="row" padding="none">

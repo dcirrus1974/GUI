@@ -3,13 +3,20 @@ import {  PERSONAL_DATA,
           SET_LOADING,
           SET_VISIBLE_DIALOG_CREATE_FOLDER,
           SET_VISIBLE_DIALOG_UPLOAD_FILE,
-          SET_VISIBLE_DILOG_EDIT_SETTINGS,
+          SET_VISIBLE_DIALOG_EDIT_SETTINGS,
           SET_VISIBLE_DIALOG_CREATE_NEW_USER,
           SET_VISIBLE_DIALOG_RENAME,
           SET_VISIBLE_DIALOG_DEPOSIT_REQUEST,
           SET_VISIBLE_DIALOG_SEARCH_OPTION,
           SET_VISIBLE_DIALOG_TAG_FILES,
           SET_VISIBLE_DIALOG_SHARE_FILES,
+          SET_VISIBLE_DIALOG_DELETE_FILES_OR_FOLDERS,
+          SET_VISIBLE_DIALOG_EXPORT_LOGS,
+          SET_VISIBLE_DIALOG_COPY,
+          SET_ACTION_OPEN_CLOSE,
+          SET_VISIBLE_DIALOG_MOVE,
+          SET_VISIBLE_DIALOG_HISTORY,
+          SET_IS_TABLE,
 } from '../actions/actions';
 
 const initState = {
@@ -25,6 +32,13 @@ const initState = {
   visibleDialogSearchOption: false,
   visibleDialogTagFiles: false,
   visibleDialogShareFiles: false,
+  visibleDialogDeleteFilesOrFolders: false,
+  visibleDialogExportLogs: false,
+  visibleDialogCopy: false,
+  actionOpenClose: false,
+  visibleDialogMove: false,
+  visibleDialogHistory: false,
+  isTable:true,
 }
 
 const personalReducer = (state = initState, action) => {
@@ -61,7 +75,7 @@ const personalReducer = (state = initState, action) => {
         visibleDialogUploadFile: !!action.payload,
       }
 
-    case SET_VISIBLE_DILOG_EDIT_SETTINGS:
+    case SET_VISIBLE_DIALOG_EDIT_SETTINGS:
       return {
         ...state,
         visibleDialogEditSettings: !!action.payload,
@@ -101,6 +115,48 @@ const personalReducer = (state = initState, action) => {
       return {
         ...state,
         visibleDialogShareFiles: !!action.payload,
+      }
+
+    case SET_VISIBLE_DIALOG_DELETE_FILES_OR_FOLDERS:
+      return {
+        ...state,
+        visibleDialogDeleteFilesOrFolders: !!action.payload
+      }
+
+    case SET_VISIBLE_DIALOG_EXPORT_LOGS:
+      return {
+        ...state,
+        visibleDialogExportLogs: !!action.payload,
+      }
+
+    case SET_VISIBLE_DIALOG_COPY:
+      return {
+        ...state,
+        visibleDialogCopy: !!action.payload,
+      }
+
+    case SET_ACTION_OPEN_CLOSE:
+      return {
+        ...state,
+        actionOpenClose: !!action.payload,
+      }
+
+    case SET_VISIBLE_DIALOG_MOVE:
+      return {
+        ...state,
+        visibleDialogMove: !!action.payload,
+      }
+
+    case SET_VISIBLE_DIALOG_HISTORY:
+      return {
+        ...state,
+        visibleDialogHistory: !!action.payload,
+      }
+      
+    case SET_IS_TABLE:
+      return {
+        ...state,
+        isTable:action.payload,
       }
 
     default:

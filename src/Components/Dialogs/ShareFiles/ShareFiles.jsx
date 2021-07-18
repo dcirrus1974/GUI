@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     padding: theme.spacing(2, 3, 0, 3),
     flexGrow: 1,
-    minHeight: '481px',
+    minHeight: '488px',
     backgroundColor: theme.palette.background.paper,
   },
   mainHeader: {
@@ -110,6 +110,35 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   radio: {
     marginTop: '10px',
+  },
+  greyLi: {
+    color: 'grey',
+    fontSize: '12px',
+    marginTop: '15px',
+  },
+  buttonShare: {
+    textTransform: 'none', 
+    backgroundColor: '#2196f3', 
+    color: 'white', 
+    fontWeight: 'bold',
+    float: 'right',
+    margin: theme.spacing(5, 0, 3, 0),
+  },
+  buttonCancel: {
+    textTransform: 'none', 
+    borderColor: '#2196f3', 
+    color: '#2196f3', 
+    fontWeight: 'bold',
+    float: 'right',
+    margin: theme.spacing(5, 2, 0, 0),
+  },
+  buttonCopyLink: {
+    textTransform: 'none', 
+    backgroundColor: '#ffaa00', 
+    color: 'white', 
+    fontWeight: 'bold',
+    float: 'left',
+    margin: theme.spacing(5, 0, 0, 0),
   },
 }));
 
@@ -208,30 +237,71 @@ function FormDialog(props) {
           </TabPanel>
 
           <TabPanel value={value} index={1}>
-            <Grid container spacing={2}>
+            <Grid container spacing={5}>
               <Grid item xs={6} sm={6}>
-                <div className={classes.label}>Permitted Apps</div>
-                <div style={{marginTop: '10px'}}>
-                  <input type="checkbox" id="drive" name="drive" defaultChecked value="checked" />
-                  <label htmlFor="drive"> DCirrus Drive</label>
+                <div className={classes.label}>
+                  <div>Subject <span style={{color: 'red'}}>*</span></div>
+                  <TextField 
+                    variant="outlined" 
+                    placeholder="Akhil@dcirrus.com"
+                    size="small" 
+                    style={{width: "100%", marginTop: "5px"}} />
                 </div>
-                <div style={{marginTop: '10px'}}>
-                  <input type="checkbox" id="admin" name="admin" defaultChecked value="checked" />
-                  <label htmlFor="admin"> Admin</label>
+                <div className={classes.label} style={{marginTop:'20px'}}>
+                  <div>Description <span style={{color: 'red'}}>*</span></div>
+                  <TextField 
+                    variant="outlined"
+                    multiline
+                    rows="5"
+                    placeholder="Lorem Ipsum is simply dummy text of the printing and 
+                                typesetting industry. Lorem Ipsum has been the 
+                                industry's standard dummy text ever since the 1500s, 
+                                when an unknown printer took a galley of type and 
+                                scrambled it to make a type specimen book. "
+                    size="small" 
+                    style={{width: "100%", marginTop: "5px"}} />
                 </div>
               </Grid>
               <Grid item xs={6} sm={6}>
-                <div className={classes.label}>Device Access</div>
                 <div style={{marginTop: '10px'}}>
-                  <input type="checkbox" id="usb" name="usb" defaultChecked value="checked" />
-                  <label htmlFor="usb"> USB</label>
+                  <input type="checkbox" id="unlimitedSharing" name="unlimitedSharing" defaultChecked value="checked" />
+                  <label htmlFor="unlimitedSharing"> Unlimited Sharing</label>
                 </div>
-                <div style={{marginTop: '10px'}}>
-                  <input type="checkbox" id="dvd" name="dvd" defaultChecked value="checked" />
-                  <label htmlFor="dvd"> DVD</label>
+                <div className={classes.greyLi}>Expire in (days)</div>
+                <div className={classes.greyLi} style={{paddingLeft: '12px'}}>10 Years</div>
+                <div style={{marginTop:'50px'}}>
+                  <div className={classes.label}>Access Permissions</div>
+                  <div style={{marginTop: '8px'}}>
+                    <input type="checkbox" id="view" name="view" defaultChecked value="checked" />
+                    <label htmlFor="view"> View</label>
+                    <input type="checkbox" id="download" name="download" defaultChecked value="checked" style={{marginLeft:'25px'}} />
+                    <label htmlFor="download"> Download</label>
+                    <input type="checkbox" id="collaborate" name="collaborate" defaultChecked value="checked" style={{marginLeft:'25px'}} />
+                    <label htmlFor="collaborate"> Collaborate</label>
+                  </div>
+                </div>
+                <div style={{marginTop:'20px'}}>
+                  <div className={classes.label}>Others</div>
+                  <div style={{marginTop: '8px'}}>
+                    <input type="checkbox" id="addWatermark" name="addWatermark" defaultChecked value="checked" />
+                    <label htmlFor="addWatermark"> Add Watermark</label>
+                    <input type="checkbox" id="addSignature" name="addSignature" defaultChecked value="checked" style={{marginLeft:'25px'}} />
+                    <label htmlFor="addSignature"> Add Signature</label>
+                  </div>
                 </div>
               </Grid>
             </Grid>
+            <div style={{marginTop:'30px'}}>
+              <Button variant="contained" className={classes.buttonShare}>
+                Share
+              </Button>
+              <Button variant="outlined" className={classes.buttonCancel}>
+                Cancel
+              </Button>
+              <Button variant="contained" className={classes.buttonCopyLink}>
+                Copy Link
+              </Button>
+            </div>
           </TabPanel>
         </div>        
       </Dialog>

@@ -1,77 +1,112 @@
-import React, { Component } from 'react';
-import Button from '@material-ui/core/Button';
+import React from 'react';
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import { connect } from 'react-redux';
-import { setVisibleDialogCopy, setSelectedFolderSublist, enterToPreviousDirectorySublist, copyItems } from '../../../Actions/Actions.js';
-import FileListSublist from '../../FileList/FileListSublist/FileListSublist.jsx'; 
-import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
+import { makeStyles, Theme } from '@material-ui/core/styles';
+import {AppBar,
+        Tabs,
+        Tab,
+        Typography,
+        Box,
+      } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
+import FileList from '../../FileList/FileList';
+import { useSelector, useDispatch } from 'react-redux';
+import { setVisibleDialogCopy } from '../../../actions/actions';
 
-class FormDialog extends Component {
-
-    render() {
-        const { 
-            selectedPath, handleClose, handleSave, open, 
-            canGoBack, canCopy, selectedFiles, handleGoBack 
-        } = this.props;
-
-        return (
-            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-copy" fullWidth={true} maxWidth={'sm'}>
-                <form>
-                    <DialogTitle id="form-dialog-copy">
-                        Copy files to <small style={{color: 'grey'}}>{ selectedPath.join('/') }</small>
-                    </DialogTitle>
-                    <DialogContent>
-                        <FileListSublist />
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleGoBack} color="primary" type="button" disabled={!canGoBack}>
-                            <KeyboardArrowLeftIcon /> Go back directory
-                        </Button>
-
-                        <Button onClick={handleClose} color="primary" type="button">
-                            Cancel
-                        </Button>
-                        <Button color="primary" onClick={(e) => handleSave(e, selectedFiles)} disabled={!canCopy} type="submit">
-                            Copy
-                        </Button>
-                    </DialogActions>
-                </form>
-            </Dialog>
-        );
-    }
+interface TabPanelProps {
+  children?: React.ReactNode;
+  index: any;
+  value: any;
 }
 
-const mapStateToProps = (state) => {
-    // prevent copying to same folder
-    const canCopy = state.path.join('') !== state.pathSublist.join('') + (state.selectedFolderSublist ? state.selectedFolderSublist.name : '');
+function TabPanel(props: TabPanelProps) {
+  const { children, value, index, ...other } = props;
 
-    return {
-        open: state.visibleDialogCopy,
-        selectedFolderSublist: state.selectedFolderSublist,
-        selectedPath: state.selectedFolderSublist ? [...state.pathSublist, state.selectedFolderSublist.name] : [],
-        canGoBack: state.pathSublist.length,
-        canCopy: state.selectedFolderSublist && canCopy,
-        selectedFiles: state.selectedFiles
-    };
-};
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`scrollable-auto-tabpanel-${index}`}
+      aria-labelledby={`scrollable-auto-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography component={'div'}>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        handleClose: (event) => {
-            dispatch(setSelectedFolderSublist(null));
-            dispatch(setVisibleDialogCopy(false));
-        },
-        handleSave: (event, selectedFiles) => {
-            dispatch(copyItems(selectedFiles));
-        },
-        handleGoBack: (event) => {
-            dispatch(setSelectedFolderSublist(null));
-            dispatch(enterToPreviousDirectorySublist());
-        }
-    };
-};
+function a11yProps(index: any) {
+  return {
+    id: `scrollable-auto-tab-${index}`,
+    'aria-controls': `scrollable-auto-tabpanel-${index}`,
+  };
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(FormDialog);
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    padding: theme.spacing(2, 3, 0, 3),
+    flexGrow: 1,
+    minHeight: '488px',
+    backgroundColor: theme.palette.background.paper,
+  },
+  mainHeader: {
+    padding: theme.spacing(3, 3, 0, 3),
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  title: {
+    fontSize: '22px',
+    fontWeight: 'bold',
+  },
+}));
+
+function FormDialog(props) {
+  const classes = useStyles();
+  const [value, setValue] = React.useState(0);
+  const dispatch = useDispatch();
+  const open = useSelector(state => state.personalData.visibleDialogCopy);
+
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+    setValue(newValue);
+  };  
+
+  return (
+    <>
+      <Dialog open={open} onClose={() => dispatch(setVisibleDialogCopy(false))} aria-labelledby="form-dialog-create-folder" fullWidth={true} maxWidth={'md'} style={{display: 'content'}}>
+        <div className={classes.mainHeader}>
+          <div className={classes.title}>Copy: <span style={{color: '#2196f3'}}>Folder / File</span></div>
+          <CloseIcon onClick={() => dispatch(setVisibleDialogCopy(false))} style={{color: 'grey', cursor: 'pointer'}} />
+        </div>
+        <div className={classes.root}>
+          <AppBar position="static" color="default">
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              indicatorColor="primary"
+              textColor="primary"
+              variant="scrollable"
+              scrollButtons="auto"
+              aria-label="scrollable auto tabs example"
+            >
+              <Tab label="Personal Files" {...a11yProps(0)} style={{textTransform: 'none'}} />
+              <Tab label="Data Room" {...a11yProps(1)} style={{textTransform: 'none'}} />
+            </Tabs>
+          </AppBar>
+
+          <TabPanel value={value} index={0}>
+            <FileList />
+          </TabPanel>
+
+          <TabPanel value={value} index={1}>
+            <FileList />
+          </TabPanel>
+        </div>        
+      </Dialog>
+    </>
+  );
+}
+
+export default FormDialog;

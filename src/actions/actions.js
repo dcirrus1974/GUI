@@ -5,13 +5,20 @@ export const FOLDERCLICK_DATA = 'FOLDER REDUCER CLICK DATA';
 export const SET_LOADING = 'SET REDUCER LOADING';
 export const SET_VISIBLE_DIALOG_CREATE_FOLDER = 'SET VISIBLE DIALOG CREATE FOLDER';
 export const SET_VISIBLE_DIALOG_UPLOAD_FILE = 'SET VISIBLE DIALOG UPLOAD FILE';
-export const SET_VISIBLE_DILOG_EDIT_SETTINGS = 'SET VISIBLE DILOG EDIT SETTINGS';
+export const SET_VISIBLE_DIALOG_EDIT_SETTINGS = 'SET VISIBLE DIALOG EDIT SETTINGS';
 export const SET_VISIBLE_DIALOG_CREATE_NEW_USER = 'SET VISIBLE DIALOG CREATE NEW USER';
 export const SET_VISIBLE_DIALOG_RENAME = 'SET VISIBLE DIALOG RENAME';
 export const SET_VISIBLE_DIALOG_DEPOSIT_REQUEST = 'SET VISIBLE DIALOG DEPOSIT REQUEST';
 export const SET_VISIBLE_DIALOG_SEARCH_OPTION = 'SET VISIBLE DIALOG SEARCH OPTION';
 export const SET_VISIBLE_DIALOG_TAG_FILES = 'SET VISIBLE DIALOG TAG FILES';
 export const SET_VISIBLE_DIALOG_SHARE_FILES = 'SET VISIBLE DIALOG SHARE FILES';
+export const SET_VISIBLE_DIALOG_DELETE_FILES_OR_FOLDERS = 'SET VISIBLE DIALOG DELETE FILES OR FOLDERS'
+export const SET_VISIBLE_DIALOG_EXPORT_LOGS = 'SET VISIBLE DIALOG EXPORT LOGS';
+export const SET_VISIBLE_DIALOG_COPY = 'SET VISIBLE DIALOG COPY';
+export const SET_ACTION_OPEN_CLOSE = 'SET ACTION OPEN CLOSE';
+export const SET_VISIBLE_DIALOG_MOVE = 'SET VISIBLE DIALOG MOVE';
+export const SET_VISIBLE_DIALOG_HISTORY = 'SET VISIBLE DIALOG HISTORY';
+export const SET_IS_TABLE = 'SET IS TABLE';
 
 export const getPersonalData = () => async dispatch => {
   dispatch(setLoading(true));
@@ -84,7 +91,7 @@ export const setVisibleDialogUploadFile = (visible) => {
 
 export const setVisibleDialogEditSettings = (visible) => {
   return {
-    type: SET_VISIBLE_DILOG_EDIT_SETTINGS,
+    type: SET_VISIBLE_DIALOG_EDIT_SETTINGS,
     payload: !!visible,
   }
 }
@@ -128,5 +135,54 @@ export const setVisibleDialogShareFiles = (visible) => {
   return {
     type: SET_VISIBLE_DIALOG_SHARE_FILES,
     payload: !!visible,
+  }
+}
+
+export const setVisibleDialogDeleteFilesOrFolders = (visible) => {
+  return {
+    type: SET_VISIBLE_DIALOG_DELETE_FILES_OR_FOLDERS,
+    payload: !!visible,
+  }
+}
+
+export const setVisibleDialogExportLogs = (visible) => {
+  return {
+    type: SET_VISIBLE_DIALOG_EXPORT_LOGS,
+    payload: !!visible,
+  }
+}
+
+export const setVisibleDialogCopy = (visible) => {
+  return {
+    type: SET_VISIBLE_DIALOG_COPY,
+    payload: !!visible,
+  }
+}
+
+export const setActionOpenClose = (visible) => {
+  return {
+    type: SET_ACTION_OPEN_CLOSE,
+    payload: !!visible,
+  }
+}
+
+export const setVisibleDialogMove = (visible) => {
+  return {
+    type: SET_VISIBLE_DIALOG_MOVE,
+    payload: !!visible,
+  }
+}
+
+export const setVisibleDialogHistory = (visible) => {
+  return {
+    type: SET_VISIBLE_DIALOG_HISTORY,
+    payload: !!visible,
+  }
+}
+
+export const setIsTable = (value) => {
+  return {
+    type: SET_IS_TABLE,
+    payload:value,
   }
 }

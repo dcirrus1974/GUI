@@ -15,12 +15,18 @@ import UserProfile from './UserProfile';
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    width: 'calc(100%)',
     display: 'flex',
     height: '73px',
     borderBottom: '1px solid #e2e2e2',
+    justifyContent:'space-between',
+    alignItems:'center',
+    position:'fixed',
+    zIndex:10,
+    backgroundColor:'white',
   },
   growOne: {
-    flexGrow: 1,
+    flexGrow:1,
   },
   growTwo: {
     flexGrow: 2,

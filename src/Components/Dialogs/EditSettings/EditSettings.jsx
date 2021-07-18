@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   labelOne: {
     fontFamily: "Poppins",
     fontWeight: '800',
-    marginTop: '23px',
+    marginTop: '10px',
     fontSize: '15px',
   },
   title: {
@@ -205,6 +205,10 @@ function FormDialog(props) {
                   <input type="radio" id="disable" name="watermark" defaultChecked value="CSS" style={{marginLeft: '48px'}} />
                   <label htmlFor="disable">Disable</label>
                 </div>
+                <div style={{marginTop: '15px'}}>
+                  <input type="checkbox" id="factor" name="factor" defaultChecked value="checked" />
+                  <label htmlFor="factor"> Enable 2 factor authentication</label>
+                </div>
               </Grid>
             </Grid>
           </TabPanel>
@@ -214,7 +218,7 @@ function FormDialog(props) {
               <Grid item xs={3} sm={3} />
               <Grid item xs={6} sm={6}>
                 <div>
-                  <input type="checkbox" id="show" name="show" value="checked" />
+                  <input type="checkbox" id="show" name="show" defaultChecked value="checked" />
                   <label htmlFor="show"> Show Project Index Number</label>
                 </div>
                 <div className={classes.labelOne}>
@@ -260,6 +264,10 @@ function FormDialog(props) {
                       shrink: true,
                     }}
                   />
+                </div>
+                <div style={{marginTop: '10px'}}>
+                  <input type="checkbox" id="factor" name="factor" defaultChecked value="checked" />
+                  <label htmlFor="factor"> Enable 2 factor authentication</label>
                 </div>
               </Grid>
             </Grid>

@@ -65,7 +65,7 @@ function LongMenu() {
           }}
         >
           {options.map((option,index) => (
-            <MenuItem key={option} onClick={handleClose}>
+            <MenuItem key={index} onClick={handleClose}>
               {option}
             </MenuItem>
           ))}
@@ -284,17 +284,17 @@ export default function EnhancedTableAll(props) {
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.Username);
+                  const isItemSelected = isSelected(index+page * rowsPerPage);
                   const labelId = `enhanced-table-checkbox-${index}`;
                   const usercell=<div className="usercell"><Avatar src={img1}></Avatar><span>Akhil</span></div>
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.Username)}
+                      onClick={(event) => handleClick(event, (index+page * rowsPerPage))}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.Username}
+                      key={index}
                       selected={isItemSelected}
                     >
                       <TableCell align="center" component="th" id={labelId} scope="row" padding="none">

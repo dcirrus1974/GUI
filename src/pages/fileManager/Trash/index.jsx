@@ -12,7 +12,7 @@ export default function Trash(){
       <Navbar />
       <div style={{display: 'flex'}}>
         <Sidebar />
-        <div style={{width: '100%'}}>
+        <div style={{width: '100%', marginTop: '74px'}}>
           <Header title="Trash" />
           <FileList />
         </div>

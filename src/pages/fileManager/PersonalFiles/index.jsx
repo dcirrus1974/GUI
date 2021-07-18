@@ -13,7 +13,7 @@ export default function PersonalFiles(){
       <Navbar />
       <div style={{display: 'flex'}}>
         <Sidebar />
-        <div style={{width: '100%'}}>
+        <div style={{width: '100%', marginTop: '74px'}}>
           <PersonalRootHeader title="Personal Files" />
           <FileList />
         </div>

@@ -202,7 +202,7 @@ export default function EnhancedTableAccess() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.name);
+      const newSelecteds = rows.map((n) => n.UserDetails);
       setSelected(newSelecteds);
       return;
     }
@@ -265,15 +265,15 @@ export default function EnhancedTableAccess() {
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.UserDetails);
+                  const isItemSelected = isSelected(index+page * rowsPerPage);
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.UserDetails)}
+                      onClick={(event) => handleClick(event, (index+page * rowsPerPage))}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.UserDetails}
+                      key={index}
                       selected={isItemSelected}
                     >
                       <TableCell align="center">{row.UserDetails}</TableCell>                        

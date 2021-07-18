@@ -17,14 +17,6 @@ import img_1 from '../../../assets/images/avatar.png';
 import { AvatarGroup } from '@material-ui/lab';
 import Chip from '@material-ui/core/Chip';
 import './FileTable.css';
-import File from '../File.jsx';
-import { useSelector} from 'react-redux';
-
-function createData(name, size, share, version, date,tag) {
-  return { name, size, share, version, date,tag};
-}
-
-
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -73,7 +65,7 @@ function EnhancedTableHead(props) {
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align="center"
+            align={headCell.id==="name"?"left":"center"}
             padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -166,7 +158,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EnhancedTable() {
+export default function EnhancedTable(props) {
+  
+  const rows = props.rows;
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
@@ -219,22 +213,6 @@ export default function EnhancedTable() {
   };
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
-  const fileList = useSelector(state => state.personalData.allData);
-  if(fileList.object==null)
-    return <center>No Files</center>;
-  const CalSize=(size)=>{
-    if(size<1024)
-      return size+'Byte';
-    else if(size<1024*1024)
-      return Math.floor(size/1024)+'KB';
-    else if(size<1024*1024*1024)
-      return Math.floor(size/(1024*1024))+'MB';
-    else
-      return Math.floor(size/(1024*1024*1024))+'GB';
-  }    
-  const rows = fileList.object.map((file) => {
-    return createData(file.folderNM,CalSize(file.folderSize),"Shared",file.versionNumber,file.fileCreatedDate,file.tag);
-   });   
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
 
@@ -262,20 +240,20 @@ export default function EnhancedTable() {
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.name);
+                  const isItemSelected = isSelected(index+page * rowsPerPage);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.name)}                      
+                      onClick={(event) => handleClick(event, (index+page * rowsPerPage))}                      
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.name}
+                      key={index}
                       selected={isItemSelected}
                     >                      
                       <TableCell component="th" id={labelId} scope="row" padding="none">
-                        <File type='S' name={row.name} size='1MB'/>
+                        {row.name}
                       </TableCell>
                       <TableCell align="center">{row.size}</TableCell>
                       <TableCell align="center" className="avatar_">                          
