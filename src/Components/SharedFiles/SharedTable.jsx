@@ -13,10 +13,108 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
-import img_1 from '../../../assets/images/avatar.png';
-import { AvatarGroup } from '@material-ui/lab';
-import Chip from '@material-ui/core/Chip';
+import img_1 from '../../assets/images/avatar.png';
+import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import IconButton from '@material-ui/core/IconButton';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import ErrorOutlineOutlinedIcon from '@material-ui/icons/ErrorOutlineOutlined';
+import BorderColorOutlinedIcon from '@material-ui/icons/BorderColorOutlined';
 import './FileTable.css';
+  const menu_style={
+    display:'flex',
+    justifyContent:'flex-start',
+    alignItems:'center',
+    gap:'10px',
+  };
+
+  const options = [
+    <div style={menu_style}><BorderColorOutlinedIcon color="secondary"/><span>Edit</span></div>,
+    <div style={menu_style}><DeleteOutlineOutlinedIcon color="secondary"/><span>Delete</span></div>,
+  ];
+const ITEM_HEIGHT = 48;
+function LongMenu() {
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+  
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+  
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
+  
+    return (
+      <div>
+        <IconButton
+          aria-label="more"
+          aria-controls="long-menu"
+          aria-haspopup="true"
+          onClick={handleClick}
+        >
+          <MoreVertIcon />
+        </IconButton>
+        <Menu
+          id="long-menu"
+          anchorEl={anchorEl}
+          keepMounted
+          open={open}
+          onClose={handleClose}
+          PaperProps={{
+            style: {
+              maxHeight: ITEM_HEIGHT * 4.5,
+              width: '20ch',
+            },
+          }}
+        >
+          {options.map((option,index) => (
+            <MenuItem key={index} onClick={handleClose}>
+              {option}
+            </MenuItem>
+          ))}
+        </Menu>
+      </div>
+    );
+  }
+  //////////////////////////
+
+function createData(SharedTo,Subject, SharedOn,ExpiryDate,Actions) {
+    return {SharedTo,Subject, SharedOn,ExpiryDate,Actions};
+  };
+
+const SharedToA=
+<div style={{display:'flex',justifyContent:'flex-start'}}>
+    <Avatar alt="Remy Sharp" src={img_1} style={{fill:"#ffaa00", width:"20px", height:"20px"}} />
+    <Typography variant="body1" >Akhil@dcirrus.com</Typography>
+</div>;
+
+const ActionCell=
+<div style={{display:'flex', justifyContent:'space-evenly', alignItems:'center'}}>
+    <ErrorOutlineOutlinedIcon color="primary"/><LongMenu/>
+</div>;
+const rows = [
+    createData(SharedToA,"Project 01 Share", "20/10/2020", "Umlimited",ActionCell),
+    createData(SharedToA,"Project 01 Share", "20/10/2020", "5days",ActionCell),
+    createData(SharedToA,"Project 01 Share", "20/10/2020", "1year",ActionCell),
+    createData(SharedToA,"Project 01 Share", "20/10/2020", "Umlimited",ActionCell),
+    createData(SharedToA,"Project 01 Share", "20/10/2020", "5days",ActionCell),
+    createData(SharedToA,"Project 01 Share", "20/10/2020", "1year",ActionCell),
+    createData(SharedToA,"Project 01 Share", "20/10/2020", "Umlimited",ActionCell),
+    createData(SharedToA,"Project 01 Share", "20/10/2020", "5days",ActionCell),
+    createData(SharedToA,"Project 01 Share", "20/10/2020", "1year",ActionCell),
+    createData(SharedToA,"Project 01 Share", "20/10/2020", "Umlimited",ActionCell),
+    createData(SharedToA,"Project 01 Share", "20/10/2020", "5days",ActionCell),
+    createData(SharedToA,"Project 01 Share", "20/10/2020", "1year",ActionCell),
+    createData(SharedToA,"Project 01 Share", "20/10/2020", "Umlimited",ActionCell),
+    createData(SharedToA,"Project 01 Share", "20/10/2020", "5days",ActionCell),
+    createData(SharedToA,"Project 01 Share", "20/10/2020", "1year",ActionCell),
+    createData(SharedToA,"Project 01 Share", "20/10/2020", "Umlimited",ActionCell),
+    createData(SharedToA,"Project 01 Share", "20/10/2020", "5days",ActionCell),
+    createData(SharedToA,"Project 01 Share", "20/10/2020", "1year",ActionCell),
+    
+];
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -45,12 +143,11 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-  { id: 'name', numeric: false, disablePadding: true, label: 'Name'},
-  { id: 'Size', numeric: true, disablePadding: false, label: 'Size' },
-  { id: 'Share_to', numeric: true, disablePadding: false, label: 'Share to' },
-  { id: 'Version', numeric: true, disablePadding: false, label: 'Version' },
-  { id: 'Date', numeric: true, disablePadding: false, label: 'Date' },
-  { id: 'Tag', numeric: true, disablePadding: false, label: 'Tag' },
+  { id: 'SharedTo', numeric: false, disablePadding: true, label: 'Shared To'},
+  { id: 'Subject', numeric: true, disablePadding: false, label: 'Subject' },
+  { id: 'SharedOn', numeric: true, disablePadding: false, label: 'Shared On' },
+  { id: 'ExpiryDate', numeric: true, disablePadding: false, label: 'ExpiryDate' },
+  { id: 'Actions', numeric: true, disablePadding: false, label: 'Actions' },
 ];
 
 function EnhancedTableHead(props) {
@@ -65,7 +162,7 @@ function EnhancedTableHead(props) {
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align={headCell.id==="name"?"left":"center"}
+            align={headCell.id==="SharedTo"?"left":"center"}
             padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -158,9 +255,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EnhancedTable(props) {
+export default function SharedTable(props) {
   
-  const rows = props.rows;
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
@@ -251,23 +347,14 @@ export default function EnhancedTable(props) {
                       key={index}
                       selected={isItemSelected}
                     >                      
-                      <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {row.name}
+                      <TableCell component="th" id={labelId} scope="row" padding="20px">
+                        {row.SharedTo}
                       </TableCell>
-                      <TableCell align="center">{row.size}</TableCell>
-                      <TableCell align="center" className="avatar_">                          
-                        <AvatarGroup max={4}>
-                          <Avatar alt="Remy Sharp" src={img_1} style={{fill:"#ffaa00", width:"20px", height:"20px"}} />
-                          <Avatar alt="Remy Sharp" src={img_1} style={{fill:"#ffaa00", width:"20px", height:"20px"}} />
-                          <Avatar alt="Remy Sharp" src={img_1} style={{fill:"#ffaa00", width:"20px", height:"20px"}} />
-                          <Avatar alt="Remy Sharp" src={img_1} style={{fill:"#ffaa00", width:"20px", height:"20px"}} />
-                        </AvatarGroup>                          
-                      </TableCell>
-                      <TableCell align="center">{row.version}</TableCell>
-                      <TableCell align="center">{row.date}</TableCell>
+                      <TableCell align="center">{row.Subject}</TableCell>                      
+                      <TableCell align="center">{row.SharedOn}</TableCell>
+                      <TableCell align="center">{row.ExpiryDate}</TableCell>
                       <TableCell align="center">
-                        <Chip label="Project2"/>
-                        <Chip label="Important"/>
+                        {row.Actions}
                       </TableCell>
                     </TableRow>
                   );

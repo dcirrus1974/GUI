@@ -17,11 +17,15 @@ import {  PERSONAL_DATA,
           SET_VISIBLE_DIALOG_MOVE,
           SET_VISIBLE_DIALOG_HISTORY,
           SET_IS_TABLE,
+          SET_FILE_CLICK_EVENTS,
+          SET_FILE_PATH,
+          DEL_CHILD_PATH,
 } from '../actions/actions';
 
 const initState = {
   allData: [],
   subData: [],
+  selectedFiles: [],
   loading: false,
   visibleDialogCreateFolder: false,
   visibleDialogUploadFile: false,
@@ -38,7 +42,9 @@ const initState = {
   actionOpenClose: false,
   visibleDialogMove: false,
   visibleDialogHistory: false,
-  isTable:true,
+  isTable: true,
+  isSelected: false,
+  filePath:[],
 }
 
 const personalReducer = (state = initState, action) => {
@@ -157,6 +163,41 @@ const personalReducer = (state = initState, action) => {
       return {
         ...state,
         isTable:action.payload,
+      }
+
+    case SET_FILE_CLICK_EVENTS:
+      if(state.selectedFiles.includes(action.payload)){
+        state.selectedFiles.splice(state.selectedFiles.indexOf(action.payload), 1);
+      } else {
+        state.selectedFiles.push(action.payload);
+      }
+      if(state.selectedFiles.length > 0)
+        state.isSelected = true;
+      else
+        state.isSelected = false;
+      return {
+        ...state,
+        isSelected: state.isSelected,
+      }
+    
+    case SET_FILE_PATH:
+      state.filePath.push(action.payload);
+      return {
+        ...state,
+      }
+    
+    case DEL_CHILD_PATH:
+      const new_path=[];
+      for(var i=0; i<state.filePath.length; i++){
+        new_path.push(state.filePath[i]);
+        if(action.payload===state.filePath[i].props.id)
+          break;
+      }
+      if(action.payload==="root")
+        new_path.splice(0,new_path.length);
+      return {
+        ...state,
+        filePath: new_path,
       }
 
     default:

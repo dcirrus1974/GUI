@@ -14,7 +14,7 @@ export default function DataRoom(){
         <Sidebar />
         <div style={{width: '100%', marginTop: '74px'}}>
           <PersonalSubHeader title="Data Room" />
-          <FileList/>
+          <FileList checkbox="true"/>
         </div>
       </div>
       <Dialogs />

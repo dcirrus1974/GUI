@@ -1,0 +1,16 @@
+.MuiTableCell-alignRight.avatar_{
+    display: flex;
+    justify-content: flex-end;
+}
+
+span.MuiTableSortLabel-root.MuiTableSortLabel-active {
+    margin-left: 20%;
+}
+span.MuiButtonBase-root.MuiTableSortLabel-root{
+    margin-left: 20%;
+}
+
+.MuiAvatarGroup-root {
+    display: flex;
+    justify-content: center;
+}

@@ -62,6 +62,7 @@ hr{
 }
 
 .folder_title{
+    margin-top: 20px;
     margin-left: 20px;
     font-family: "Poppins" !important;
     font-size: 20px;
@@ -70,6 +71,7 @@ hr{
 }
 
 .file_title{
+    margin-top: 20px;
     margin-left: 20px;
     font-family: "Poppins" !important;
     font-size: 20px;

@@ -8,6 +8,7 @@ import './FileList.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { getPersonalData } from '../../actions/actions';
 import EnhancedTable from '../File/FileTable/FileTable.jsx';
+import {Grid} from '@material-ui/core';
 
 
 
@@ -27,7 +28,8 @@ const CalSize=(size)=>{
 
 
 
-export default function FileList() {
+export default function FileList(props) {
+    const {checkbox, isDialog}=props;
     const rows=[];
     const dispatch = useDispatch();
     const loading = useSelector(state => state.personalData.loading);
@@ -41,7 +43,7 @@ export default function FileList() {
             folderListComponent = fileList.object.map((file, key)=>{
                 if(file.folderType==="S"){
                     rows.push(CreateData(
-                        <File type={file.folderType} name={file.folderNM} editable={file.notePresent} folderId={file.folderId} size={file.folderSize} key={key} />,
+                        <File checkbox={checkbox} type={file.folderType} name={file.folderNM} editable={file.notePresent} folderId={'folder'+file.folderId} size={file.folderSize} key={key} />,
                         CalSize(file.folderSize),
                         "Shared",
                         file.versionNumber,
@@ -49,12 +51,12 @@ export default function FileList() {
                         file.tag        
                     ));
                 }
-                return file.fileType===null ? <File type={file.folderType} name={file.folderNM} editable={file.notePresent} folderId={file.folderId} size={file.folderSize} key={key} />:null
+                return file.fileType===null ?<File isDialog={isDialog} checkbox={checkbox} type={file.folderType} name={file.folderNM} editable={file.notePresent} folderId={'folder'+file.folderId} size={file.folderSize} key={key} />:null
             });              
             fileListComponent = fileList.object.map((file, key) => {
                 if(file.fileType!==null){
                     rows.push(CreateData(
-                        <File type={file.fileType} name={file.fileName} editable={file.notePresent} size={file.fileSize} key={key} />,
+                        <File checkbox={checkbox} type={file.fileType} name={file.fileName} editable={file.notePresent} size={file.fileSize} key={key} folderId={'file'+file.id} />,
                         CalSize(file.fileSize),
                         "Shared",
                         file.versionNumber,
@@ -62,7 +64,7 @@ export default function FileList() {
                         file.tag
                     ));
                 }
-                return file.fileType!==null ? <File type={file.fileType} name={file.fileName} editable={file.notePresent} size={file.fileSize} key={key} />:null
+                return file.fileType!==null ? <File checkbox={checkbox} type={file.fileType} name={file.fileName} editable={file.notePresent} size={file.fileSize} key={key} folderId={'file'+file.id}/>:null
             });                                  
         }
     } 
@@ -71,7 +73,7 @@ export default function FileList() {
             folderListComponent = subFileList.object.unIndexFoldersList.map((file, key)=>{
                 if(file.folderType==="S"){
                     rows.push(CreateData(
-                        <File type={file.folderType} name={file.folderPathLastChild} editable={file.notePresent} folderId={file.folderId} size={file.folderSize} key={key} />,
+                        <File checkbox={checkbox} type={file.folderType} name={file.folderPathLastChild} editable={file.notePresent} folderId={'folder'+file.folderId} size={file.folderSize} key={key} />,
                         CalSize(file.folderSize),
                         "Shared",
                         file.versionNumber,
@@ -79,12 +81,12 @@ export default function FileList() {
                         file.tag        
                     ));
                 }
-                return <File type={file.folderType} name={file.folderPathLastChild} editable={file.notePresent} folderId={file.folderId} size={file.folderSize} key={key} />
+                return <File isDialog={isDialog} checkbox={checkbox} type={file.folderType} name={file.folderPathLastChild} editable={file.notePresent} folderId={'folder'+file.folderId} size={file.folderSize} key={key} />
             });
             fileListComponent = subFileList.object.unIndexDocumentsList.map((file, key) => {
                 if(file.fileType!==null){
                     rows.push(CreateData(
-                        <File type={file.fileType} name={file.fileName} editable={file.notePresent} size={file.fileSize} key={key} />,
+                        <File checkbox={checkbox} type={file.fileType} name={file.fileName} editable={file.notePresent} size={file.fileSize} key={key} folderId={'file'+file.id}/>,
                         CalSize(file.fileSize),
                         "Shared",
                         file.versionNumber,
@@ -92,7 +94,7 @@ export default function FileList() {
                         file.tag
                     ));
                 }
-                return <File type={file.fileType} name={file.fileName} editable={file.notePresent} size={file.fileSize} key={key} />
+                return <File checkbox={checkbox} type={file.fileType} name={file.fileName} editable={file.notePresent} size={file.fileSize} key={key} folderId={'file'+file.id}/>
             });
         }
     }
@@ -101,7 +103,14 @@ export default function FileList() {
         dispatch(getPersonalData());            
     }, []);
 
-    return isTable?<div className="FileList">
+    return isDialog?
+    <div className="folder_content">        
+        { loading ? 
+            <Loader /> : 
+            folderListComponent.length ? folderListComponent : <FolderListEmptyMessage />
+        }            
+    </div>
+    :isTable?<div className="FileList">
         <div className="folder_title">Folders</div>
         <div className="folder_content">
         { loading ? 

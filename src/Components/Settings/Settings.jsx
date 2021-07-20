@@ -104,7 +104,7 @@ export default function ScrollableTabsButtonAuto() {
           <div className={classes.header}>Company Details</div>
           <Grid container spacing={2}>
             <Grid item xs={6} sm={3} style={{color: 'grey'}}>
-              <div className={classes.top}>Company Name</div>
+              <div className={classes.top}>Project Name</div>
               <div className={classes.top}>Document Storage Region</div>
             </Grid>
             <Grid item xs={6} sm={3}>
@@ -154,6 +154,7 @@ export default function ScrollableTabsButtonAuto() {
       <TabPanel value={value} index={2} className={classes.body}>
         <Grid container spacing={2} style={{marginTop: '15px'}}>
           <Grid item xs={6} sm={3} style={{color: 'grey'}}>
+            <div className={classes.topchild}>Title</div>
             <div className={classes.topchild}>Upload Notification</div>
             <div className={classes.topchild}>Time Zone</div>
             <div className={classes.topspecial}>Project Index Number</div>
@@ -161,6 +162,7 @@ export default function ScrollableTabsButtonAuto() {
             <div className={classes.topchild}>End Date</div>
           </Grid>
           <Grid item xs={6} sm={6}>
+            <div className={classes.topchild}>NDA</div>
             <div className={classes.topchild}>Daily (at 8am)</div>
             <div className={classes.topchild}>Washington, DC,USA (GMT-4)</div>
             <div className={classes.topspecial}>Showing</div>

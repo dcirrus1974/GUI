@@ -6,6 +6,7 @@ import {AppBar,
         Tab,
         Typography,
         Box,
+        Button,
       } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import FileList from '../../FileList/FileList';
@@ -61,6 +62,35 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontSize: '22px',
     fontWeight: 'bold',
   },
+  footer: {
+    backgroundColor: 'white',
+    height: '50px',
+    marginLeft: '-48px',
+    width: '960px',
+    position: 'fixed',
+    bottom: '32px',
+    paddingTop: theme.spacing(1),
+  },
+  buttonOne: {
+    textTransform: 'none', 
+    backgroundColor: '#2196f3', 
+    color: 'white', 
+    fontWeight: 'bold',
+    float: 'right',
+    margin: theme.spacing(0, 3, 0, 0),
+    borderRadius: '3px',
+  },
+  buttonTwo: {
+    textTransform: 'none', 
+    color: 'grey', 
+    fontWeight: 'bold',
+    float: 'right',
+    margin: theme.spacing(0, 2, 0, 0),
+  },
+  footerLeft: {
+    float: 'left',
+    marginLeft: theme.spacing(3),
+  }
 }));
 
 function FormDialog(props) {
@@ -97,11 +127,35 @@ function FormDialog(props) {
           </AppBar>
 
           <TabPanel value={value} index={0}>
-            <FileList />
+            <FileList isDialog="true" />
+            <div className={classes.footer}>
+              <div className={classes.footerLeft}>
+                <div style={{color: 'grey', fontSize: '11px'}}>Selected Path:</div>
+                <div>Personal Folder / My Folder 01 / Folder 5 / <span style={{color: '#2196f3'}}>Folder3</span></div>
+              </div>
+              <Button variant="contained" className={classes.buttonOne}>
+                Move Here
+              </Button>
+              <Button variant="outlined" className={classes.buttonTwo}>
+                Back
+              </Button>
+            </div>
           </TabPanel>
 
           <TabPanel value={value} index={1}>
-            <FileList />
+            <FileList isDialog="true" />
+            <div className={classes.footer}>
+              <div className={classes.footerLeft}>
+                <div style={{color: 'grey', fontSize: '11px'}}>Selected Path:</div>
+                <div>Personal Folder / My Folder 01 / Folder 5 / <span style={{color: '#2196f3'}}>Folder3</span></div>
+              </div>
+              <Button variant="contained" className={classes.buttonOne}>
+                Move Here
+              </Button>
+              <Button variant="outlined" className={classes.buttonTwo}>
+                Back
+              </Button>
+            </div>
           </TabPanel>
         </div>        
       </Dialog>

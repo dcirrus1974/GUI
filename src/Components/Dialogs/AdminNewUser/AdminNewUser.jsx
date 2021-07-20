@@ -173,6 +173,14 @@ function FormDialog(props) {
                     size="small" 
                     style={{width: "100%", marginTop: "5px"}} />
                 </div>
+                <div className={classes.label}>
+                  <div>Comamany Name <span style={{color: 'red'}}>*</span></div>
+                  <TextField 
+                    variant="outlined" 
+                    placeholder="Comamany Name"
+                    size="small" 
+                    style={{width: "100%", marginTop: "5px"}} />
+                </div>
               </Grid>
 
               <Grid item xs={6} sm={6}>
@@ -183,17 +191,14 @@ function FormDialog(props) {
                   <input type="radio" id="User" name="user_role" value="User" style={{marginLeft: '48px'}} />
                   <label htmlFor="User">Regular User</label>
                 </div>
-                <div className={classes.radio}>
-                  <div className={classes.labelOne}>Sync Access</div>
-                  <input type="radio" id="dataRoom" name="sync_access" defaultChecked value="dataRoom" />
-                  <label htmlFor="dataRoom">Data Room Sync</label>
-                  <input type="radio" id="personalFolder" name="sync_access" value="personalFolder" style={{marginLeft: '48px'}} />
-                  <label htmlFor="personalFolder">Personal Folder Sync</label>
-                </div>
                 <div style={{marginTop: '30px'}}>
                   <div className={classes.labelOne}>Others</div>
                   <input type="checkbox" id="autoLogin" name="autoLogin" defaultChecked value="checked" />
                   <label htmlFor="autoLogin"> Allow Auto Login</label>
+                  <div style={{marginTop: '10px'}}>
+                    <input type="checkbox" id="factor" name="factor" defaultChecked value="checked" />
+                    <label htmlFor="factor"> Enable 2 factor authentication</label>
+                  </div>
                 </div>
               </Grid>
             </Grid>

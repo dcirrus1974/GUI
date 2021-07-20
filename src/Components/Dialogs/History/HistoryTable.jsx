@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { lighten, makeStyles } from '@material-ui/core/styles';
+import {makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -9,14 +9,86 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import Avatar from '@material-ui/core/Avatar';
-import img_1 from '../../../assets/images/avatar.png';
-import { AvatarGroup } from '@material-ui/lab';
-import Chip from '@material-ui/core/Chip';
-import './FileTable.css';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import IconButton from '@material-ui/core/IconButton';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import GetAppOutlinedIcon from '@material-ui/icons/GetAppOutlined';
+import './userTable.css';
+
+
+const options = [
+    <span>Edit</span>,
+  ];
+const ITEM_HEIGHT = 48;
+function LongMenu() {
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+  
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+  
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
+  
+    return (
+      <div>
+        <IconButton
+          aria-label="more"
+          aria-controls="long-menu"
+          aria-haspopup="true"
+          onClick={handleClick}
+        >
+          <MoreVertIcon />
+        </IconButton>
+        <Menu
+          id="long-menu"
+          anchorEl={anchorEl}
+          keepMounted
+          open={open}
+          onClose={handleClose}
+          PaperProps={{
+            style: {
+              maxHeight: ITEM_HEIGHT * 4.5,
+              width: '30ch',
+            },
+          }}
+        >
+          {options.map((option,index) => (
+            <MenuItem key={index} onClick={handleClose}>
+              {option}
+            </MenuItem>
+          ))}
+        </Menu>
+      </div>
+    );
+  }
+function createData(Version, LoginId , Size, CreatedDate, Actions) {
+  return {Version, LoginId , Size, CreatedDate, Actions};
+}
+const editcell=
+<div className="editcell">
+<GetAppOutlinedIcon color="primary"/><LongMenu/>
+</div>;
+const rows = [
+  createData('01', 'marshal@yahoo.com', '146.33KB','12/25/2020', editcell),
+  createData('01', 'marshal@yahoo.com', '146.33KB','12/25/2020', editcell),
+  createData('01', 'marshal@yahoo.com', '146.33KB','12/25/2020', editcell),
+  createData('01', 'marshal@yahoo.com', '146.33KB','12/25/2020', editcell),
+  createData('01', 'marshal@yahoo.com', '146.33KB','12/25/2020', editcell),
+  createData('01', 'marshal@yahoo.com', '146.33KB','12/25/2020', editcell),
+  createData('01', 'marshal@yahoo.com', '146.33KB','12/25/2020', editcell),
+  createData('01', 'marshal@yahoo.com', '146.33KB','12/25/2020', editcell),
+  createData('01', 'marshal@yahoo.com', '146.33KB','12/25/2020', editcell),
+  createData('01', 'marshal@yahoo.com', '146.33KB','12/25/2020', editcell),
+  createData('01', 'marshal@yahoo.com', '146.33KB','12/25/2020', editcell),
+  createData('01', 'marshal@yahoo.com', '146.33KB','12/25/2020', editcell),
+  createData('01', 'marshal@yahoo.com', '146.33KB','12/25/2020', editcell),
+  createData('01', 'marshal@yahoo.com', '146.33KB','12/25/2020', editcell),
+];
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -45,27 +117,26 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-  { id: 'name', numeric: false, disablePadding: true, label: 'Name'},
+  { id: 'Version', numeric: false, disablePadding: true, label: 'Version' },
+  { id: 'LoginId', numeric: true, disablePadding: false, label: 'Login Id' },
   { id: 'Size', numeric: true, disablePadding: false, label: 'Size' },
-  { id: 'Share_to', numeric: true, disablePadding: false, label: 'Share to' },
-  { id: 'Version', numeric: true, disablePadding: false, label: 'Version' },
-  { id: 'Date', numeric: true, disablePadding: false, label: 'Date' },
-  { id: 'Tag', numeric: true, disablePadding: false, label: 'Tag' },
+  { id: 'CreatedDate', numeric: true, disablePadding: false, label: 'Created Date' },
+  { id: 'Actions', numeric: true, disablePadding: false, label: 'Actions' },
 ];
 
 function EnhancedTableHead(props) {
   const { classes, order, orderBy, onRequestSort } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
-  };  
+  };
 
   return (
     <TableHead>
-      <TableRow>        
+      <TableRow>
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align={headCell.id==="name"?"left":"center"}
+            align='center'
             padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -98,42 +169,6 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-const useToolbarStyles = makeStyles((theme) => ({
-  root: {
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(1),
-  },
-  highlight:
-    theme.palette.type === 'light'
-      ? {
-          color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-        }
-      : {
-          color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark,
-        },
-  title: {
-    flex: '1 1 100%',
-  },
-}));
-
-const EnhancedTableToolbar = (props) => {
-  const classes = useToolbarStyles();
-
-  return (
-    <Toolbar>      
-      <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-          FileTable
-      </Typography>     
-    </Toolbar>
-  );
-};
-
-EnhancedTableToolbar.propTypes = {
-  numSelected: PropTypes.number.isRequired,
-};
-
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -158,9 +193,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EnhancedTable(props) {
-  
-  const rows = props.rows;
+export default function HistoryTable(props) {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
@@ -176,7 +209,7 @@ export default function EnhancedTable(props) {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = {rows}.map((n) => n.name);
+      const newSelecteds = rows.map((n) => n.Version);
       setSelected(newSelecteds);
       return;
     }
@@ -213,9 +246,8 @@ export default function EnhancedTable(props) {
   };
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
+
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
-
-
 
   return (
     <div className={classes.root}>
@@ -223,7 +255,8 @@ export default function EnhancedTable(props) {
         <TableContainer>
           <Table
             className={classes.table}
-            aria-labelledby="tableTitle"            
+            aria-labelledby="tableTitle"
+            size='medium'
             aria-label="enhanced table"
           >
             <EnhancedTableHead
@@ -241,34 +274,23 @@ export default function EnhancedTable(props) {
                 .map((row, index) => {
                   const isItemSelected = isSelected(index+page * rowsPerPage);
                   const labelId = `enhanced-table-checkbox-${index}`;
-
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, (index+page * rowsPerPage))}                      
+                      onClick={(event) => handleClick(event, (index+page * rowsPerPage))}
+                      role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
                       key={index}
                       selected={isItemSelected}
-                    >                      
-                      <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {row.name}
+                    >
+                      <TableCell align="center" component="th" id={labelId} scope="row" padding="none">
+                      {row.Version}
                       </TableCell>
-                      <TableCell align="center">{row.size}</TableCell>
-                      <TableCell align="center" className="avatar_">                          
-                        <AvatarGroup max={4}>
-                          <Avatar alt="Remy Sharp" src={img_1} style={{fill:"#ffaa00", width:"20px", height:"20px"}} />
-                          <Avatar alt="Remy Sharp" src={img_1} style={{fill:"#ffaa00", width:"20px", height:"20px"}} />
-                          <Avatar alt="Remy Sharp" src={img_1} style={{fill:"#ffaa00", width:"20px", height:"20px"}} />
-                          <Avatar alt="Remy Sharp" src={img_1} style={{fill:"#ffaa00", width:"20px", height:"20px"}} />
-                        </AvatarGroup>                          
-                      </TableCell>
-                      <TableCell align="center">{row.version}</TableCell>
-                      <TableCell align="center">{row.date}</TableCell>
-                      <TableCell align="center">
-                        <Chip label="Project2"/>
-                        <Chip label="Important"/>
-                      </TableCell>
+                      <TableCell align="center">{row.LoginId}</TableCell>
+                      <TableCell align="center">{row.Size}</TableCell>
+                      <TableCell align="center">{row.CreatedDate}</TableCell>
+                      <TableCell align="center">{row.Actions}</TableCell>
                     </TableRow>
                   );
                 })}
@@ -289,7 +311,7 @@ export default function EnhancedTable(props) {
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
-      </Paper>      
+      </Paper>
     </div>
   );
 }

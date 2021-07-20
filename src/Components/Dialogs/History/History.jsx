@@ -4,6 +4,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import Dialog from '@material-ui/core/Dialog';
 import { useSelector, useDispatch } from 'react-redux';
 import { setVisibleDialogHistory } from '../../../actions/actions';
+import HistoryTable from './HistoryTable';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -36,7 +37,7 @@ function FormDialog(props) {
             <CloseIcon onClick={() => dispatch(setVisibleDialogHistory(false))} style={{color: 'grey', cursor: 'pointer'}} />
           </div>
           <div className={classes.root}> 
-            
+            <HistoryTable/>
           </div>
         </Dialog>
       </>

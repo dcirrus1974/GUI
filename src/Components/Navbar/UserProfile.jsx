@@ -11,6 +11,7 @@ import img_avartar from '../../assets/images/avatar.png';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import DoughnutChart from './DoughnutChart.jsx';
+import Switch from '@material-ui/core/Switch';
 
 const useStyles = makeStyles((theme) => ({
   btn_pass:{
@@ -83,6 +84,10 @@ const useStyles = makeStyles((theme) => ({
       marginTop:theme.spacing(2),
       gap:theme.spacing(2),
     },
+  switch:{
+    display:'flex',
+    justifyContent:'flex-start',
+  },
   canvas:{
   }
 }));
@@ -148,6 +153,7 @@ export default function UserProfile() {
                   <Grid item xs={6}>
                     <div className={classes.right_part}>
                         <div className={classes.personal}>
+                            <div className={classes.switch}><Switch/><Typography variant="h6" color="secondary">SWITCH ACCOUNT FEATURE</Typography></div>
                             <Typography variant="h6" color="primary">Personal Details</Typography>
                             <Grid container spacing={3} style={{marginTop:10}}>
                                 <Grid item xs={6}>
@@ -167,6 +173,30 @@ export default function UserProfile() {
                                 </Grid>
                                 <Grid item xs={6}>
                                     <Typography variant="body1" color="default">A23 Pvt Ltd</Typography>
+                                </Grid>
+                                <Grid item xs={12}>
+                                  <div style={{marginTop: '10px'}}>
+                                    <input type="checkbox" id="factor" name="factor" defaultChecked value="checked" />
+                                    <label htmlFor="factor"> Enable 2 factor authentication</label>
+                                  </div>
+                                </Grid>
+                                <Grid item xs={4}>
+                                  <div style={{marginTop: '10px'}}>
+                                    <input type="checkbox" id="factor" name="factor" defaultChecked value="checked" />
+                                    <label htmlFor="factor"> SMS</label>
+                                  </div>
+                                </Grid>
+                                <Grid item xs={4}>
+                                  <div style={{marginTop: '10px'}}>
+                                    <input type="checkbox" id="factor" name="factor" defaultChecked value="checked" />
+                                    <label htmlFor="factor">Email</label>
+                                  </div>
+                                </Grid>
+                                <Grid item xs={4}>
+                                  <div style={{marginTop: '10px'}}>
+                                    <input type="checkbox" id="factor" name="factor" defaultChecked value="checked" />
+                                    <label htmlFor="factor">Whatsapp</label>
+                                  </div>
                                 </Grid>
                             </Grid>                                                        
                         </div>

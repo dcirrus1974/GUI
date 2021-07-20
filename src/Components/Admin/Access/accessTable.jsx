@@ -56,28 +56,27 @@ function Switches() {
         <PurpleSwitch/>
     );
 };
-function createData(UserDetails,View, DownloadOriginal,Share,Upload,Delete,Copy) {
-  return {UserDetails,View, DownloadOriginal,Share,Upload,Delete,Copy};
+function createData(UserDetails,View, DownloadOriginal,Share,Upload,Delete,Copy, Download) {
+  return {UserDetails,View, DownloadOriginal,Share,Upload,Delete,Copy, Download};
 };
 const rows = [
-  createData('Yogeshwaran',<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>),
-  createData('Yogeshwaran',<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>),
-  createData('Yogeshwaran',<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>),
-  createData('Yogeshwaran',<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>),
-  createData('Yogeshwaran',<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>),
-  createData('Yogeshwaran',<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>),
-  createData('Yogeshwaran',<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>),
-  createData('Yogeshwaran',<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>),
-  createData('Yogeshwaran',<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>),
-  createData('Yogeshwaran',<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>),
-  createData('Yogeshwaran',<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>),
-  createData('Yogeshwaran',<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>),
-  createData('Yogeshwaran',<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>),
-  createData('Yogeshwaran',<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>),
-  createData('Yogeshwaran',<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>),
-  createData('Yogeshwaran',<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>),
-  createData('Yogeshwaran',<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>),
-  createData('Yogeshwaran',<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>),
+  createData('Yogeshwaran',<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>),
+  createData('Yogeshwaran',<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>),
+  createData('Yogeshwaran',<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>),
+  createData('Yogeshwaran',<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>),
+  createData('Yogeshwaran',<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>),
+  createData('Yogeshwaran',<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>),
+  createData('Yogeshwaran',<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>),
+  createData('Yogeshwaran',<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>),
+  createData('Yogeshwaran',<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>),
+  createData('Yogeshwaran',<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>),
+  createData('Yogeshwaran',<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>),
+  createData('Yogeshwaran',<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>),
+  createData('Yogeshwaran',<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>),
+  createData('Yogeshwaran',<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>),
+  createData('Yogeshwaran',<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>),
+  createData('Yogeshwaran',<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>),
+  createData('Yogeshwaran',<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>,<Switches/>),
   
 ];
 
@@ -115,6 +114,7 @@ const headCells = [
   { id: 'Upload', numeric: true, disablePadding: false, label: 'Upload' },
   { id: 'Delete', numeric: true, disablePadding: false, label: 'Delete' },
   { id: 'Copy', numeric: true, disablePadding: false, label: 'Copy' },
+  { id: 'Download', numeric: true, disablePadding: false, label: 'Download' },
 ];
 
 function EnhancedTableHead(props) {
@@ -283,6 +283,7 @@ export default function EnhancedTableAccess() {
                       <TableCell align="center">{row.Upload}</TableCell>
                       <TableCell align="center">{row.Delete}</TableCell>
                       <TableCell align="center">{row.Copy}</TableCell>
+                      <TableCell align="center">{row.Download}</TableCell>
                     </TableRow>
                   );
                 })}

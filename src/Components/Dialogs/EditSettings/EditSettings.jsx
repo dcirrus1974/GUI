@@ -221,6 +221,10 @@ function FormDialog(props) {
                   <input type="checkbox" id="show" name="show" defaultChecked value="checked" />
                   <label htmlFor="show"> Show Project Index Number</label>
                 </div>
+                <div style={{marginTop: '10px'}}>
+                  <input type="checkbox" id="factor" name="factor" defaultChecked value="checked" />
+                  <label htmlFor="factor"> Enable 2 factor authentication</label>
+                </div>
                 <div className={classes.labelOne}>
                   <div>Time Zone <span style={{color: 'red'}}>*</span></div>
                   <TextField 
@@ -264,10 +268,6 @@ function FormDialog(props) {
                       shrink: true,
                     }}
                   />
-                </div>
-                <div style={{marginTop: '10px'}}>
-                  <input type="checkbox" id="factor" name="factor" defaultChecked value="checked" />
-                  <label htmlFor="factor"> Enable 2 factor authentication</label>
                 </div>
               </Grid>
             </Grid>

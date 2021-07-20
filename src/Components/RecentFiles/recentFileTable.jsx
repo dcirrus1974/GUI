@@ -6,16 +6,16 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
-import img_1 from '../../../assets/images/avatar.png';
+import img_1 from '../../assets/images/avatar.png';
 import { AvatarGroup } from '@material-ui/lab';
 import Chip from '@material-ui/core/Chip';
+import File from '../File/File.jsx'; 
 import './FileTable.css';
 
 function descendingComparator(a, b, orderBy) {
@@ -158,29 +158,55 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+function CreateData(name, size, share, version, date,tag) {
+    return { name, size, share, version, date,tag};
+}
+
+
 export default function EnhancedTable(props) {
   
-  const rows = props.rows;
+    const file_part = <File type="docx" name="My File01" size="1MB"/>;
+    const rows1=[
+        CreateData(file_part,"1MB","Shared","10","10/8/2020","important"),
+        CreateData(file_part,"1MB","Shared","10","10/8/2020","important"),
+        CreateData(file_part,"1MB","Shared","10","10/8/2020","important"),
+        CreateData(file_part,"1MB","Shared","10","10/8/2020","important"),
+        CreateData(file_part,"1MB","Shared","10","10/8/2020","important"),
+        CreateData(file_part,"1MB","Shared","10","10/8/2020","important"),
+        CreateData(file_part,"1MB","Shared","10","10/8/2020","important"),
+        CreateData(file_part,"1MB","Shared","10","10/8/2020","important"),
+    ];
+    
+    const rows2=[
+        CreateData(file_part,"1MB","Shared","10","10/8/2020","important"),
+        CreateData(file_part,"1MB","Shared","10","10/8/2020","important"),
+        CreateData(file_part,"1MB","Shared","10","10/8/2020","important"),
+        CreateData(file_part,"1MB","Shared","10","10/8/2020","important"),
+        CreateData(file_part,"1MB","Shared","10","10/8/2020","important"),
+        CreateData(file_part,"1MB","Shared","10","10/8/2020","important"),
+        CreateData(file_part,"1MB","Shared","10","10/8/2020","important"),
+        CreateData(file_part,"1MB","Shared","10","10/8/2020","important"),
+    ];
+    
+    const rows3=[
+        CreateData(file_part,"1MB","Shared","10","10/8/2020","important"),
+        CreateData(file_part,"1MB","Shared","10","10/8/2020","important"),
+        CreateData(file_part,"1MB","Shared","10","10/8/2020","important"),
+        CreateData(file_part,"1MB","Shared","10","10/8/2020","important"),
+        CreateData(file_part,"1MB","Shared","10","10/8/2020","important"),
+        CreateData(file_part,"1MB","Shared","10","10/8/2020","important"),
+        CreateData(file_part,"1MB","Shared","10","10/8/2020","important"),
+        CreateData(file_part,"1MB","Shared","10","10/8/2020","important"),
+    ];
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
   const [selected, setSelected] = React.useState([]);
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
-  };
-
-  const handleSelectAllClick = (event) => {
-    if (event.target.checked) {
-      const newSelecteds = {rows}.map((n) => n.name);
-      setSelected(newSelecteds);
-      return;
-    }
-    setSelected([]);
   };
 
   const handleClick = (event, name) => {
@@ -203,19 +229,7 @@ export default function EnhancedTable(props) {
     setSelected(newSelected);
   };
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
   const isSelected = (name) => selected.indexOf(name) !== -1;
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
-
-
 
   return (
     <div className={classes.root}>
@@ -231,21 +245,19 @@ export default function EnhancedTable(props) {
               numSelected={selected.length}
               order={order}
               orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={rows.length}
             />
             <TableBody>
-              {stableSort(rows, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            <div className="folder_title">Today</div>
+              {stableSort(rows1, getComparator(order, orderBy))
                 .map((row, index) => {
-                  const isItemSelected = isSelected(index+page * rowsPerPage);
+                  const isItemSelected = isSelected(index);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, (index+page * rowsPerPage))}                      
+                      onClick={(event) => handleClick(event, (index))}                      
                       aria-checked={isItemSelected}
                       tabIndex={-1}
                       key={index}
@@ -272,23 +284,81 @@ export default function EnhancedTable(props) {
                     </TableRow>
                   );
                 })}
-              {emptyRows > 0 && (
-                <TableRow style={{ height: (53) * emptyRows }}>
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
+                <div className="folder_title">Yesterday</div>
+                {stableSort(rows2, getComparator(order, orderBy))
+                .map((row, index) => {
+                  const isItemSelected = isSelected(index);
+                  const labelId = `enhanced-table-checkbox-${index}`;
+
+                  return (
+                    <TableRow
+                      hover
+                      onClick={(event) => handleClick(event, (index))}                      
+                      aria-checked={isItemSelected}
+                      tabIndex={-1}
+                      key={index}
+                      selected={isItemSelected}
+                    >                      
+                      <TableCell component="th" id={labelId} scope="row" padding="none">
+                        {row.name}
+                      </TableCell>
+                      <TableCell align="center">{row.size}</TableCell>
+                      <TableCell align="center" className="avatar_">                          
+                        <AvatarGroup max={4}>
+                          <Avatar alt="Remy Sharp" src={img_1} style={{fill:"#ffaa00", width:"20px", height:"20px"}} />
+                          <Avatar alt="Remy Sharp" src={img_1} style={{fill:"#ffaa00", width:"20px", height:"20px"}} />
+                          <Avatar alt="Remy Sharp" src={img_1} style={{fill:"#ffaa00", width:"20px", height:"20px"}} />
+                          <Avatar alt="Remy Sharp" src={img_1} style={{fill:"#ffaa00", width:"20px", height:"20px"}} />
+                        </AvatarGroup>                          
+                      </TableCell>
+                      <TableCell align="center">{row.version}</TableCell>
+                      <TableCell align="center">{row.date}</TableCell>
+                      <TableCell align="center">
+                        <Chip label="Project2"/>
+                        <Chip label="Important"/>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+                <div className="folder_title">Last Month</div>
+                {stableSort(rows3, getComparator(order, orderBy))
+                .map((row, index) => {
+                  const isItemSelected = isSelected(index);
+                  const labelId = `enhanced-table-checkbox-${index}`;
+
+                  return (
+                    <TableRow
+                      hover
+                      onClick={(event) => handleClick(event, (index))}                      
+                      aria-checked={isItemSelected}
+                      tabIndex={-1}
+                      key={index}
+                      selected={isItemSelected}
+                    >                      
+                      <TableCell component="th" id={labelId} scope="row" padding="none">
+                        {row.name}
+                      </TableCell>
+                      <TableCell align="center">{row.size}</TableCell>
+                      <TableCell align="center" className="avatar_">                          
+                        <AvatarGroup max={4}>
+                          <Avatar alt="Remy Sharp" src={img_1} style={{fill:"#ffaa00", width:"20px", height:"20px"}} />
+                          <Avatar alt="Remy Sharp" src={img_1} style={{fill:"#ffaa00", width:"20px", height:"20px"}} />
+                          <Avatar alt="Remy Sharp" src={img_1} style={{fill:"#ffaa00", width:"20px", height:"20px"}} />
+                          <Avatar alt="Remy Sharp" src={img_1} style={{fill:"#ffaa00", width:"20px", height:"20px"}} />
+                        </AvatarGroup>                          
+                      </TableCell>
+                      <TableCell align="center">{row.version}</TableCell>
+                      <TableCell align="center">{row.date}</TableCell>
+                      <TableCell align="center">
+                        <Chip label="Project2"/>
+                        <Chip label="Important"/>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
             </TableBody>
           </Table>
         </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
       </Paper>      
     </div>
   );

@@ -19,6 +19,9 @@ export const SET_ACTION_OPEN_CLOSE = 'SET ACTION OPEN CLOSE';
 export const SET_VISIBLE_DIALOG_MOVE = 'SET VISIBLE DIALOG MOVE';
 export const SET_VISIBLE_DIALOG_HISTORY = 'SET VISIBLE DIALOG HISTORY';
 export const SET_IS_TABLE = 'SET IS TABLE';
+export const SET_FILE_CLICK_EVENTS = 'SET FILE CLICK EVENTS';
+export const SET_FILE_PATH = 'SET FILE PATH LIST';
+export const DEL_CHILD_PATH  = 'DEL CHILD PATH';
 
 export const getPersonalData = () => async dispatch => {
   dispatch(setLoading(true));
@@ -46,8 +49,9 @@ export const getPersonalData = () => async dispatch => {
 }
 
 export const folderClickResults = (folderId) => async dispatch => {
+  const Id = folderId.replace("file",'').replace("folder",'');
   const folderDoubleClick = await Axios.request({
-    url: 'https://dcirrus.co.in/api.acms/v1/app/unindexdoclist/0/0/' + folderId +'/DESC%60lastmodified/fetchAllAdmFolderChildListResponse',
+    url: 'https://dcirrus.co.in/api.acms/v1/app/unindexdoclist/0/0/' + Id +'/DESC%60lastmodified/fetchAllAdmFolderChildListResponse',
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -183,6 +187,27 @@ export const setVisibleDialogHistory = (visible) => {
 export const setIsTable = (value) => {
   return {
     type: SET_IS_TABLE,
-    payload:value,
+    payload: value,
+  }
+}
+
+export const fileClickEvents = (value) => {
+  return {
+    type: SET_FILE_CLICK_EVENTS,
+    payload: value,
+  }
+}
+
+export const setFilePath = (value) => {
+  return {
+    type: SET_FILE_PATH,
+    payload: value,
+  }
+}
+
+export const delChildPath = (value) => {
+  return {
+    type: DEL_CHILD_PATH,
+    payload: value,
   }
 }

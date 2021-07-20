@@ -4,6 +4,10 @@ import { BsFillGridFill } from "react-icons/bs";
 import EmptyTrashAction from '../ContextMenu/ContextMenuActions/EmptyTrashAction.jsx';
 import RestoreFilesAction from '../ContextMenu/ContextMenuActions/RestoreFilesAction.jsx';
 import DeleteSelectedAction from '../ContextMenu/ContextMenuActions/DeleteSelectedAction.jsx';
+import { useSelector, useDispatch } from 'react-redux';
+import {setIsTable} from '../../actions/actions';
+import IconButton from '@material-ui/core/IconButton';
+import ViewAgendaRoundedIcon from '@material-ui/icons/ViewAgendaRounded';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,6 +35,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header(props) {
   const classes = useStyles();
+  const isSelected = useSelector(state => state.personalData.isSelected);
+  const dispatch =useDispatch();
+  const isTable = useSelector(state => state.personalData.isTable);
 
   return (
     <div className={classes.root}>
@@ -38,10 +45,20 @@ export default function Header(props) {
         {props.title}
       </div>
       <div className={classes.grow} />
-      <RestoreFilesAction />
-      <DeleteSelectedAction />
-      <EmptyTrashAction />
-      <BsFillGridFill className={classes.bsfill} />
+      {
+        isSelected?
+          <>
+            <RestoreFilesAction />
+            <DeleteSelectedAction />
+          </>:
+          <EmptyTrashAction />
+      }
+      <IconButton onClick={() => dispatch(setIsTable(!isTable))}>              
+          {isTable?
+          <ViewAgendaRoundedIcon className={classes.list} />:
+          <BsFillGridFill className={classes.bsfill} />
+          }
+      </IconButton>
     </div>
   );
 }
